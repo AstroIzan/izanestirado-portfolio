@@ -10,6 +10,7 @@
   --hero-top: rgba(78, 240, 192, 0.24);
   --hero-bottom: rgba(255, 122, 24, 0.2);
   --footer-line: rgba(255, 255, 255, 0.14);
+  --grid-line: rgba(224, 232, 245, 0.28);
 
   min-height: 100vh;
   background:
@@ -30,6 +31,7 @@
   --panel-bg: rgba(28, 36, 45, 0.04);
   --panel-hover: rgba(28, 36, 45, 0.1);
   --footer-line: rgba(28, 36, 45, 0.2);
+  --grid-line: rgba(34, 43, 53, 0.42);
 }
 
 .page[data-site-mode="work"] {
@@ -64,13 +66,36 @@
 
 .grid {
   position: absolute;
-  inset: -50%;
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--text) 10%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--text) 10%, transparent) 1px, transparent 1px);
-  background-size: 64px 64px;
-  transform: perspective(500px) rotateX(58deg);
-  transform-origin: center;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.grid svg {
+  width: 180%;
+  height: 180%;
+  display: block;
+  transform: translate(-22%, -8%) rotateX(63deg) rotateZ(-45deg) scale(1.02);
+  transform-origin: center 68%;
+}
+
+.grid-line {
+  stroke: var(--grid-line);
+  stroke-width: 0.24;
+  vector-effect: non-scaling-stroke;
+  shape-rendering: geometricPrecision;
+}
+
+.grid-line-vertical {
+  opacity: 0.86;
+}
+
+.grid-line-horizontal {
+  opacity: 0.84;
+}
+
+.glow {
+  z-index: 1;
 }
 
 .glow {

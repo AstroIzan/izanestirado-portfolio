@@ -17,7 +17,29 @@
   <section id="home" class="hero">
 
     <div class="hero-background">
-      <div class="grid"></div>
+      <div class="grid" aria-hidden="true">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+          @for (x of gridVerticalLines; track x) {
+            <line
+              class="grid-line grid-line-vertical"
+              [attr.x1]="x"
+              y1="-20"
+              [attr.x2]="x"
+              y2="120"
+            />
+          }
+
+          @for (y of gridHorizontalLines; track y) {
+            <line
+              class="grid-line grid-line-horizontal"
+              x1="-40"
+              [attr.y1]="y"
+              x2="140"
+              [attr.y2]="y"
+            />
+          }
+        </svg>
+      </div>
       <div class="glow glow-one"></div>
       <div class="glow glow-two"></div>
     </div>

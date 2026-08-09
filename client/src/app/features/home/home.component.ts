@@ -21,6 +21,8 @@ export class HomeComponent {
   readonly modeTransitionPhase = signal<'loading' | 'revealing' | null>(null);
   readonly isTransitioningMode = computed(() => this.modeTransitionPhase() !== null);
   readonly menuMode = computed(() => this.pendingMode() ?? this.siteMode());
+  readonly gridVerticalLines = this.buildAxisLines(-36, 136, 8.28);
+  readonly gridHorizontalLines = this.buildAxisLines(-36, 136, 7.45);
 
   private modeTransitionTimeoutId: number | null = null;
   private modeRevealTimeoutId: number | null = null;
@@ -80,6 +82,16 @@ export class HomeComponent {
         this.modeRevealTimeoutId = null;
       }, HomeComponent.MODE_REVEAL_MS);
     }, HomeComponent.MODE_LOADING_MS);
+  }
+
+  private buildAxisLines(start: number, end: number, step: number): number[] {
+    const lines: number[] = [];
+
+    for (let value = start; value <= end; value += step) {
+      lines.push(Number(value.toFixed(2)));
+    }
+
+    return lines;
   }
 
   ngOnDestroy(): void {
