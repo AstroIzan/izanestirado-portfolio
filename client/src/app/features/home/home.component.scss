@@ -1,0 +1,249 @@
+.page {
+  min-height: 100vh;
+  background: #08090d;
+  color: #f4f5f7;
+}
+
+/* HERO */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 6rem 8vw;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.grid {
+  position: absolute;
+  inset: -50%;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(500px) rotateX(55deg);
+  transform-origin: center;
+}
+
+.glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+}
+
+.glow-one {
+  top: -200px;
+  right: -100px;
+  background: #6c63ff;
+}
+
+.glow-two {
+  bottom: -250px;
+  left: -150px;
+  background: #00d4ff;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  opacity: 0.6;
+}
+
+h1 {
+  margin: 0;
+  max-width: 900px;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  font-weight: 800;
+}
+
+h1 span {
+  opacity: 0.45;
+}
+
+.hero-description {
+  max-width: 650px;
+  margin: 2.5rem 0;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.7;
+  color: #a8abb7;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  color: #c5c7d0;
+  font-size: 0.85rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #45e08a;
+  box-shadow: 0 0 12px rgba(69, 224, 138, 0.8);
+}
+
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.06);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.contact-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 8vw;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #6f7280;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.scroll-indicator span {
+  display: block;
+  width: 35px;
+  height: 1px;
+  background: #6f7280;
+}
+
+
+/* CONTACT SECTION */
+
+.contact-section {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 9rem 2rem;
+}
+
+.section-header {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.section-number {
+  color: #626573;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #777b89;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+}
+
+.section-header h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: -0.04em;
+}
+
+.section-header p {
+  max-width: 600px;
+  margin: 0;
+  color: #8e929f;
+  line-height: 1.7;
+}
+
+
+/* FOOTER */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 8vw;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #646774;
+  font-size: 0.75rem;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .hero {
+    padding: 5rem 1.5rem;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  .contact-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  footer {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+  }
+}

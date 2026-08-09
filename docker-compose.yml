@@ -1,0 +1,24 @@
+services:
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    container_name: portfolio-nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - contact
+    restart: unless-stopped
+
+  contact:
+    build:
+      context: ./contact
+      dockerfile: Dockerfile
+    container_name: portfolio-contact
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+    restart: unless-stopped
