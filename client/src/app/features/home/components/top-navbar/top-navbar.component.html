@@ -1,0 +1,55 @@
+<header class="top-menu">
+
+  <button
+    type="button"
+    class="menu-panel panel-theme"
+    (click)="onToggleTheme()"
+    [attr.aria-label]="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+  >
+    <span class="panel-icon">
+      {{ isDarkMode ? '☾' : '☀' }}
+    </span>
+    <span>
+      {{ isDarkMode ? 'Black Mode' : 'White Mode' }}
+    </span>
+  </button>
+
+  <nav class="menu-panel panel-nav" aria-label="Navegacion principal">
+    <a href="#home">Home</a>
+    <a [attr.href]="siteMode === 'work' ? '#experience' : '#personal'">
+      {{ siteMode === 'work' ? 'Experience' : 'Personal' }}
+    </a>
+    <a [attr.href]="siteMode === 'work' ? '#projects' : '#volunteer'">
+      {{ siteMode === 'work' ? 'Projects' : 'Volunteer' }}
+    </a>
+    <a [attr.href]="siteMode === 'work' ? '#skills' : '#hobbies'">
+      {{ siteMode === 'work' ? 'Skills' : 'Hobbies' }}
+    </a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div
+    class="menu-panel panel-mode"
+    [class.is-work]="menuMode === 'work'"
+    [class.is-hobbie]="menuMode === 'hobbie'"
+  >
+    <button
+      type="button"
+      [class.active]="menuMode === 'work'"
+      [disabled]="isTransitioningMode"
+      (click)="onSelectMode('work')"
+    >
+      Work
+    </button>
+
+    <button
+      type="button"
+      [class.active]="menuMode === 'hobbie'"
+      [disabled]="isTransitioningMode"
+      (click)="onSelectMode('hobbie')"
+    >
+      Hobbie
+    </button>
+  </div>
+
+</header>

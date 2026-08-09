@@ -1,7 +1,20 @@
-<main class="page">
+<main
+  class="page"
+  [class.dark-mode]="isDarkMode()"
+  [class.light-mode]="!isDarkMode()"
+  [attr.data-site-mode]="siteMode()"
+>
 
-  <!-- HERO -->
-  <section class="hero">
+  <app-top-navbar
+    [isDarkMode]="isDarkMode()"
+    [siteMode]="siteMode()"
+    [menuMode]="menuMode()"
+    [isTransitioningMode]="isTransitioningMode()"
+    (toggleTheme)="toggleColorMode()"
+    (siteModeChange)="switchSiteMode($event)"
+  />
+
+  <section id="home" class="hero">
 
     <div class="hero-background">
       <div class="grid"></div>
@@ -12,7 +25,7 @@
     <div class="hero-content">
 
       <span class="eyebrow">
-        IZAN ESTIRADO
+        IZAN ESTIRADO · {{ siteMode() === 'work' ? 'WORK' : 'HOBBIE' }}
       </span>
 
       <h1>
@@ -23,23 +36,21 @@
       </h1>
 
       <p class="hero-description">
-        Desarrollo aplicaciones, APIs e infraestructuras
-        enfocadas en crear soluciones robustas, escalables
-        y fáciles de mantener.
+        {{
+          siteMode() === 'work'
+            ? 'Desarrollo aplicaciones, APIs e infraestructuras enfocadas en crear soluciones robustas, escalables y faciles de mantener.'
+            : 'Creo experiencias digitales, experimentos visuales y proyectos personales donde mezclo tecnologia, diseno y curiosidad.'
+        }}
       </p>
 
       <div class="status">
         <span class="status-dot"></span>
-
         <span>
-          Portfolio en construcción
+          {{ siteMode() === 'work' ? 'Disponible para proyectos profesionales' : 'Modo exploracion creativo activado' }}
         </span>
       </div>
 
-      <a
-        class="contact-button"
-        href="#contact"
-      >
+      <a class="contact-button" href="#contact">
         Hablemos
         <span>↓</span>
       </a>
@@ -53,17 +64,42 @@
 
   </section>
 
+  <section [id]="siteMode() === 'work' ? 'experience' : 'personal'" class="feature-section">
+    <div class="feature-title">
+      <span>01</span>
+      <h2>{{ siteMode() === 'work' ? 'Experience' : 'Personal' }}</h2>
+    </div>
+    <p>
+      {{ siteMode() === 'work' ? 'Arquitecturas cloud, backend y despliegues automatizados para producto real.' : 'Retos creativos, labs de interfaz y prototipos fuera de la rutina.' }}
+    </p>
+  </section>
 
-  <!-- CONTACT -->
-  <section
-    id="contact"
-    class="contact-section"
-  >
+  <section [id]="siteMode() === 'work' ? 'projects' : 'volunteer'" class="feature-section">
+    <div class="feature-title">
+      <span>02</span>
+      <h2>{{ siteMode() === 'work' ? 'Projects' : 'Volunteer' }}</h2>
+    </div>
+    <p>
+      {{ siteMode() === 'work' ? 'Proyectos orientados a negocio con foco en estabilidad y rendimiento.' : 'Proyectos personales donde pruebo animacion, narrativa visual y tecnologias nuevas.' }}
+    </p>
+  </section>
+
+  <section [id]="siteMode() === 'work' ? 'skills' : 'hobbies'" class="feature-section">
+    <div class="feature-title">
+      <span>03</span>
+      <h2>{{ siteMode() === 'work' ? 'Skills' : 'Hobbies' }}</h2>
+    </div>
+    <p>
+      {{ siteMode() === 'work' ? 'APIs REST, Docker, CI/CD, SQL y observabilidad.' : 'Motion design, exploracion UX/UI y experimentacion front-end.' }}
+    </p>
+  </section>
+
+  <section id="contact" class="contact-section">
 
     <div class="section-header">
 
       <span class="section-number">
-        01
+        04
       </span>
 
       <div>
@@ -77,7 +113,7 @@
 
         <p>
           Si tienes una idea, un proyecto o simplemente
-          quieres ponerte en contacto conmigo, escríbeme.
+          quieres ponerte en contacto conmigo, escribeme.
         </p>
       </div>
 
@@ -87,10 +123,7 @@
 
   </section>
 
-
-  <!-- FOOTER -->
   <footer>
-
     <span>
       © {{ currentYear }} Izan Estirado
     </span>
@@ -98,7 +131,13 @@
     <span>
       Built with Angular · Docker · Raspberry Pi
     </span>
-
   </footer>
 
 </main>
+
+@if (isTransitioningMode()) {
+  <app-mode-transition-overlay
+    [pendingMode]="pendingMode()"
+    [transitionPhase]="modeTransitionPhase()"
+  />
+}
