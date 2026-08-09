@@ -1,0 +1,67 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-portfolio
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on:
+      - self-hosted
+      - raspberry
+      - arm64
+      - production
+
+    steps:
+      - name: Deploy portfolio
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TARGET_DIR="/opt/izanestirado-portfolio"
+          ENV_FILE="/opt/docker/config/apps/izanestirado-portfolio/.env"
+
+          echo "======================================"
+          echo " Deploying Izan Estirado Portfolio"
+          echo "======================================"
+
+          cd "${TARGET_DIR}"
+
+          echo "==> Updating repository"
+
+          git fetch origin master
+          git checkout master
+          git reset --hard origin/master
+
+          echo "==> Building containers"
+
+          docker compose \
+            --env-file "${ENV_FILE}" \
+            build
+
+          echo "==> Starting containers"
+
+          docker compose \
+            --env-file "${ENV_FILE}" \
+            up -d --remove-orphans
+
+          echo "==> Cleaning unused images"
+
+          docker image prune -f
+
+          echo "==> Deployment status"
+
+          docker compose \
+            --env-file "${ENV_FILE}" \
+            ps
+
+          echo "======================================"
+          echo " Deployment completed"
+          echo "======================================"
