@@ -1,16 +1,16 @@
 .page {
-  --bg: #090b12;
-  --text: #eceef6;
-  --muted: #a6adba;
-  --line: rgba(255, 255, 255, 0.2);
-  --panel-bg: rgba(255, 255, 255, 0.03);
-  --panel-hover: rgba(255, 255, 255, 0.08);
-  --primary: #4ef0c0;
-  --secondary: #ff7a18;
-  --hero-top: rgba(78, 240, 192, 0.24);
-  --hero-bottom: rgba(255, 122, 24, 0.2);
-  --footer-line: rgba(255, 255, 255, 0.14);
-  --grid-line: rgba(224, 232, 245, 0.28);
+  --bg: var(--color-page-dark);
+  --text: var(--color-home-text-dark);
+  --muted: var(--color-home-muted-dark);
+  --line: var(--color-home-line-dark);
+  --panel-bg: var(--color-home-panel-bg-dark);
+  --panel-hover: var(--color-home-panel-hover-dark);
+  --primary: var(--color-work-primary);
+  --secondary: var(--color-work-secondary);
+  --hero-top: var(--color-home-hero-work-top);
+  --hero-bottom: var(--color-home-hero-work-bottom);
+  --footer-line: var(--color-home-footer-line-dark);
+  --grid-line: var(--color-home-grid-line-dark);
 
   min-height: 100vh;
   background:
@@ -24,28 +24,28 @@
 }
 
 .page.light-mode {
-  --bg: #f2f3eb;
-  --text: #1d2127;
-  --muted: #4f5a67;
-  --line: rgba(28, 36, 45, 0.28);
-  --panel-bg: rgba(28, 36, 45, 0.04);
-  --panel-hover: rgba(28, 36, 45, 0.1);
-  --footer-line: rgba(28, 36, 45, 0.2);
-  --grid-line: rgba(34, 43, 53, 0.42);
+  --bg: var(--color-home-bg-light);
+  --text: var(--color-home-text-light);
+  --muted: var(--color-home-muted-light);
+  --line: var(--color-home-line-light);
+  --panel-bg: var(--color-home-panel-bg-light);
+  --panel-hover: var(--color-home-panel-hover-light);
+  --footer-line: var(--color-home-footer-line-light);
+  --grid-line: var(--color-home-grid-line-light);
 }
 
 .page[data-site-mode="work"] {
-  --primary: #4ef0c0;
-  --secondary: #ff7a18;
-  --hero-top: rgba(78, 240, 192, 0.24);
-  --hero-bottom: rgba(255, 122, 24, 0.2);
+  --primary: var(--color-work-primary);
+  --secondary: var(--color-work-secondary);
+  --hero-top: var(--color-home-hero-work-top);
+  --hero-bottom: var(--color-home-hero-work-bottom);
 }
 
 .page[data-site-mode="hobbie"] {
-  --primary: #6bd2ff;
-  --secondary: #ffcf3f;
-  --hero-top: rgba(107, 210, 255, 0.28);
-  --hero-bottom: rgba(255, 207, 63, 0.24);
+  --primary: var(--color-hobbie-primary);
+  --secondary: var(--color-hobbie-secondary);
+  --hero-top: var(--color-home-hero-hobbie-top);
+  --hero-bottom: var(--color-home-hero-hobbie-bottom);
 }
 
 .hero {

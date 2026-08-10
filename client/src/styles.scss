@@ -1,6 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap");
 
+:root {
+  /* Core neutrals */
+  --color-white: #ffffff;
+  --color-black-900: #08090d;
+  --color-black-pure: #000000;
+  --color-page-dark: #090b12;
+  --color-body-text: #f4f5f7;
+
+  /* Home mode neutrals */
+  --color-home-text-dark: #eceef6;
+  --color-home-muted-dark: #a6adba;
+  --color-home-bg-light: #f2f3eb;
+  --color-home-text-light: #1d2127;
+  --color-home-muted-light: #4f5a67;
+
+  /* Site mode accents */
+  --color-work-primary: #68a691;
+  --color-work-secondary: #6bd2ff;
+  --color-hobbie-primary: #6bd2ff;
+  --color-hobbie-secondary: #ffcf3f;
+
+  /* Contact palette */
+  --color-contact-button-text: #a8abb7;
+  --color-contact-label: #c5c7d0;
+  --color-contact-error: #ff7d8a;
+  --color-contact-success: #72e9a2;
+  --color-contact-error-strong: #ff8b94;
+
+  /* Dark glass surfaces and lines */
+  --color-white-08: rgba(255, 255, 255, 0.08);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-white-14: rgba(255, 255, 255, 0.14);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-white-30: rgba(255, 255, 255, 0.3);
+  --color-white-40: rgba(255, 255, 255, 0.4);
+  --surface-glass-025: rgba(255, 255, 255, 0.025);
+  --surface-glass-03: rgba(255, 255, 255, 0.03);
+  --surface-glass-06: rgba(255, 255, 255, 0.06);
+  --surface-glass-08: rgba(255, 255, 255, 0.08);
+  --surface-black-20: rgba(0, 0, 0, 0.2);
+
+  /* Home theme tokens */
+  --color-home-line-dark: var(--color-white-20);
+  --color-home-panel-bg-dark: var(--surface-glass-03);
+  --color-home-panel-hover-dark: var(--surface-glass-08);
+  --color-home-footer-line-dark: var(--color-white-14);
+  --color-home-grid-line-dark: rgba(224, 232, 245, 0.28);
+  --color-home-line-light: rgba(28, 36, 45, 0.28);
+  --color-home-panel-bg-light: rgba(28, 36, 45, 0.04);
+  --color-home-panel-hover-light: rgba(28, 36, 45, 0.1);
+  --color-home-footer-line-light: rgba(28, 36, 45, 0.2);
+  --color-home-grid-line-light: rgba(34, 43, 53, 0.42);
+  --color-home-hero-work-top: rgba(104, 166, 145, 0.24);
+  --color-home-hero-work-bottom: rgba(107, 210, 255, 0.2);
+  --color-home-hero-hobbie-top: rgba(107, 210, 255, 0.28);
+  --color-home-hero-hobbie-bottom: rgba(255, 207, 63, 0.24);
+
+  /* Status surfaces */
+  --color-success-border: rgba(69, 224, 138, 0.25);
+  --color-success-bg: rgba(69, 224, 138, 0.05);
+  --color-error-border: rgba(255, 90, 100, 0.25);
+  --color-error-bg: rgba(255, 90, 100, 0.05);
+
+  /* Shared shadows */
+  --shadow-nav-elevated: 0 4px 14px rgba(0, 0, 0, 0.14);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -16,8 +83,8 @@ body {
 }
 
 body {
-  background: #090b12;
-  color: #f4f5f7;
+  background: var(--color-page-dark);
+  color: var(--color-body-text);
   font-family: "Space Grotesk", "Segoe UI", sans-serif;
 }
 
