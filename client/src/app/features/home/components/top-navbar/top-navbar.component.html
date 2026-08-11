@@ -4,7 +4,7 @@
     type="button"
     class="menu-panel panel-theme"
     (click)="onToggleTheme()"
-    [attr.aria-label]="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+    [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
   >
     <span class="panel-icon">
       {{ isDarkMode ? '☾' : '☀' }}
@@ -14,7 +14,7 @@
     </span>
   </button>
 
-  <nav class="menu-panel panel-nav" aria-label="Navegacion principal">
+  <nav class="menu-panel panel-nav" aria-label="Main navigation">
     <a href="#home">Home</a>
     <a [attr.href]="siteMode === 'work' ? '#experience' : '#personal'">
       {{ siteMode === 'work' ? 'Experience' : 'Personal' }}
@@ -48,7 +48,7 @@
       [disabled]="isTransitioningMode"
       (click)="onSelectMode('hobbie')"
     >
-      Hobbie
+      Hobby
     </button>
   </div>
 

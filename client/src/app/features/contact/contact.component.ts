@@ -122,12 +122,12 @@ export class ContactComponent {
 
         if (error.status === 429) {
           this.errorMessage =
-            'Has enviado demasiadas solicitudes. Inténtalo de nuevo más tarde.';
+            'You have sent too many requests. Please try again later.';
           return;
         }
 
         this.errorMessage =
-          'No se ha podido enviar el mensaje. Inténtalo de nuevo más tarde.';
+          'Message could not be sent. Please try again later.';
       }
     });
   }

@@ -47,42 +47,46 @@
     <div class="hero-content">
 
       <span class="eyebrow">
-        IZAN ESTIRADO · {{ siteMode() === 'work' ? 'WORK' : 'HOBBIE' }}
+        <span class="eyebrow-name">IZAN ESTIRADO ALFARO</span>
+        <span class="eyebrow-divider">|</span>
+        <span class="eyebrow-location">
+          <i class="fa-solid fa-earth-europe" aria-hidden="true"></i>
+          Barcelona
+        </span>
       </span>
 
       <h1>
-        Backend.
-        <span>Cloud.</span>
-        Databases.
-        <span>Web.</span>
+        {{ siteMode() === 'work' ? 'Full-Stack.' : 'Firefight.' }}
+        <span>{{ siteMode() === 'work' ? 'NET.' : 'Astro.' }}</span>
+        {{ siteMode() === 'work' ? 'Database.' : 'Mountain.' }}
+        <span>{{ siteMode() === 'work' ? 'Cloud.' : 'Motor.' }}</span>
       </h1>
 
       <p class="hero-description">
         {{
           siteMode() === 'work'
-            ? 'Desarrollo aplicaciones, APIs e infraestructuras enfocadas en crear soluciones robustas, escalables y faciles de mantener.'
-            : 'Creo experiencias digitales, experimentos visuales y proyectos personales donde mezclo tecnologia, diseno y curiosidad.'
+            ? 'Web engineer across backend, frontend, data, and cloud.'
+            : 'Volunteer wildfire firefighter, astrophotography chaser, mountain regular, and motorsport enthusiast.'
         }}
       </p>
 
       <div class="status">
         <span class="status-dot"></span>
         <span>
-          {{ siteMode() === 'work' ? 'Disponible para proyectos profesionales' : 'Modo exploracion creativo activado' }}
+          {{ siteMode() === 'work' ? '.NET APIs, Angular UIs, SQL schema design, and cloud operations.' : 'Field response, night skies, alpine trails, and engines.' }}
         </span>
       </div>
 
-      <a class="contact-button" href="#contact">
-        Hablemos
-        <span>↓</span>
-      </a>
-
     </div>
 
-    <div class="scroll-indicator">
+    <a
+      class="scroll-indicator"
+      [attr.href]="siteMode() === 'work' ? '#experience' : '#personal'"
+      aria-label="Scroll to next section"
+    >
       <span></span>
       Scroll
-    </div>
+    </a>
 
   </section>
 
@@ -92,7 +96,7 @@
       <h2>{{ siteMode() === 'work' ? 'Experience' : 'Personal' }}</h2>
     </div>
     <p>
-      {{ siteMode() === 'work' ? 'Arquitecturas cloud, backend y despliegues automatizados para producto real.' : 'Retos creativos, labs de interfaz y prototipos fuera de la rutina.' }}
+      {{ siteMode() === 'work' ? 'Build. Run. Improve. Reliable web systems.' : 'Volunteer forest-fire operations: prevention, training, and real incident response.' }}
     </p>
   </section>
 
@@ -102,7 +106,7 @@
       <h2>{{ siteMode() === 'work' ? 'Projects' : 'Volunteer' }}</h2>
     </div>
     <p>
-      {{ siteMode() === 'work' ? 'Proyectos orientados a negocio con foco en estabilidad y rendimiento.' : 'Proyectos personales donde pruebo animacion, narrativa visual y tecnologias nuevas.' }}
+      {{ siteMode() === 'work' ? 'APIs, dashboards, pipelines, and production tooling.' : 'Astronomy and astrophotography sessions focused on planning, tracking, and long exposures.' }}
     </p>
   </section>
 
@@ -112,37 +116,20 @@
       <h2>{{ siteMode() === 'work' ? 'Skills' : 'Hobbies' }}</h2>
     </div>
     <p>
-      {{ siteMode() === 'work' ? 'APIs REST, Docker, CI/CD, SQL y observabilidad.' : 'Motion design, exploracion UX/UI y experimentacion front-end.' }}
+      {{ siteMode() === 'work' ? '.NET, Angular, SQL, Docker, CI/CD, observability.' : 'Mountain routes, endurance mindset, and a deep passion for performance and motorsport culture.' }}
     </p>
   </section>
 
-  <section id="contact" class="contact-section">
-
-    <div class="section-header">
-
-      <span class="section-number">
-        04
-      </span>
-
-      <div>
-        <span class="section-label">
-          CONTACTO
-        </span>
-
-        <h2>
-          ¿Hablamos?
-        </h2>
-
-        <p>
-          Si tienes una idea, un proyecto o simplemente
-          quieres ponerte en contacto conmigo, escribeme.
-        </p>
-      </div>
-
+  <section class="feature-section">
+    <div class="feature-title">
+      <span>04</span>
+      <h2>Contact</h2>
     </div>
-
+    <p>
+      {{ siteMode() === 'work' ? 'Reach out for collaboration, inquiries, or just to say hi.' : 'Get in touch for volunteer opportunities, astronomy discussions, or motorsport chats.' }}
+    </p>
+    <br />
     <app-contact />
-
   </section>
 
   <footer>
