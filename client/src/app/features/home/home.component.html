@@ -110,14 +110,12 @@
     </p>
   </section>
 
-  <section [id]="siteMode() === 'work' ? 'skills' : 'hobbies'" class="feature-section">
+  <section [id]="siteMode() === 'work' ? 'skills' : 'hobbies'" class="feature-section skills-shell">
     <div class="feature-title">
       <span>03</span>
       <h2>{{ siteMode() === 'work' ? 'Skills' : 'Hobbies' }}</h2>
     </div>
-    <p>
-      {{ siteMode() === 'work' ? '.NET, Angular, SQL, Docker, CI/CD, observability.' : 'Mountain routes, endurance mindset, and a deep passion for performance and motorsport culture.' }}
-    </p>
+    <!-- <app-skills-showcase [siteMode]="siteMode()" /> -->
   </section>
 
   <section class="feature-section">

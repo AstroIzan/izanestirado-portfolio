@@ -2,10 +2,11 @@ import { Component, computed, effect, OnDestroy, signal } from '@angular/core';
 import { ContactComponent } from '../contact/contact.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { ModeTransitionOverlayComponent } from './components/mode-transition-overlay/mode-transition-overlay.component';
+import { SkillsShowcaseComponent } from './components/skills-showcase/skills-showcase.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ContactComponent, TopNavbarComponent, ModeTransitionOverlayComponent],
+  imports: [ContactComponent, TopNavbarComponent, ModeTransitionOverlayComponent, SkillsShowcaseComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
