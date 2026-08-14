@@ -1,12 +1,23 @@
 import { Component, computed, effect, OnDestroy, signal } from '@angular/core';
-import { ContactComponent } from '../contact/contact.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { ModeTransitionOverlayComponent } from './components/mode-transition-overlay/mode-transition-overlay.component';
 import { SkillsShowcaseComponent } from './components/skills-showcase/skills-showcase.component';
+import { HomeHeroSectionComponent } from './components/home-hero-section/home-hero-section.component';
+import { HomeFeatureSectionComponent } from './components/home-feature-section/home-feature-section.component';
+import { HomeContactSectionComponent } from './components/home-contact-section/home-contact-section.component';
+import { HomeFooterComponent } from './components/home-footer/home-footer.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ContactComponent, TopNavbarComponent, ModeTransitionOverlayComponent, SkillsShowcaseComponent],
+  imports: [
+    TopNavbarComponent,
+    ModeTransitionOverlayComponent,
+    SkillsShowcaseComponent,
+    HomeHeroSectionComponent,
+    HomeFeatureSectionComponent,
+    HomeContactSectionComponent,
+    HomeFooterComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

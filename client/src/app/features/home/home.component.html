@@ -14,131 +14,38 @@
     (siteModeChange)="switchSiteMode($event)"
   />
 
-  <section id="home" class="hero">
+  <app-home-hero-section
+    [siteMode]="siteMode()"
+    [gridVerticalLines]="gridVerticalLines"
+    [gridHorizontalLines]="gridHorizontalLines"
+  />
 
-    <div class="hero-background">
-      <div class="grid" aria-hidden="true">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-          @for (x of gridVerticalLines; track x) {
-            <line
-              class="grid-line grid-line-vertical"
-              [attr.x1]="x"
-              y1="-20"
-              [attr.x2]="x"
-              y2="120"
-            />
-          }
+  <app-home-feature-section
+    [sectionId]="siteMode() === 'work' ? 'experience' : 'personal'"
+    indexLabel="01"
+    [title]="siteMode() === 'work' ? 'Experience' : 'Personal'"
+    [description]="siteMode() === 'work' ? 'Build. Run. Improve. Reliable web systems.' : 'Volunteer forest-fire operations: prevention, training, and real incident response.'"
+  />
 
-          @for (y of gridHorizontalLines; track y) {
-            <line
-              class="grid-line grid-line-horizontal"
-              x1="-40"
-              [attr.y1]="y"
-              x2="140"
-              [attr.y2]="y"
-            />
-          }
-        </svg>
-      </div>
-      <div class="glow glow-one"></div>
-      <div class="glow glow-two"></div>
-    </div>
+  <app-home-feature-section
+    [sectionId]="siteMode() === 'work' ? 'projects' : 'volunteer'"
+    indexLabel="02"
+    [title]="siteMode() === 'work' ? 'Projects' : 'Volunteer'"
+    [description]="siteMode() === 'work' ? 'APIs, dashboards, pipelines, and production tooling.' : 'Astronomy and astrophotography sessions focused on planning, tracking, and long exposures.'"
+  />
 
-    <div class="hero-content">
+  <app-home-feature-section
+    [sectionId]="siteMode() === 'work' ? 'skills' : 'hobbies'"
+    indexLabel="03"
+    [title]="siteMode() === 'work' ? 'Skills' : 'Hobbies'"
+    [isSkillsShell]="true"
+  >
+    <app-skills-showcase [siteMode]="siteMode()" />
+  </app-home-feature-section>
 
-      <span class="eyebrow">
-        <span class="eyebrow-name">IZAN ESTIRADO ALFARO</span>
-        <span class="eyebrow-divider">|</span>
-        <span class="eyebrow-location">
-          <i class="fa-solid fa-earth-europe" aria-hidden="true"></i>
-          Barcelona
-        </span>
-      </span>
+  <app-home-contact-section [siteMode]="siteMode()" />
 
-      <h1>
-        {{ siteMode() === 'work' ? 'Full-Stack.' : 'Firefight.' }}
-        <span>{{ siteMode() === 'work' ? 'NET.' : 'Astro.' }}</span>
-        {{ siteMode() === 'work' ? 'Database.' : 'Mountain.' }}
-        <span>{{ siteMode() === 'work' ? 'Cloud.' : 'Motor.' }}</span>
-      </h1>
-
-      <p class="hero-description">
-        {{
-          siteMode() === 'work'
-            ? 'Web engineer across backend, frontend, data, and cloud.'
-            : 'Volunteer wildfire firefighter, astrophotography chaser, mountain regular, and motorsport enthusiast.'
-        }}
-      </p>
-
-      <div class="status">
-        <span class="status-dot"></span>
-        <span>
-          {{ siteMode() === 'work' ? '.NET APIs, Angular UIs, SQL schema design, and cloud operations.' : 'Field response, night skies, alpine trails, and engines.' }}
-        </span>
-      </div>
-
-    </div>
-
-    <a
-      class="scroll-indicator"
-      [attr.href]="siteMode() === 'work' ? '#experience' : '#personal'"
-      aria-label="Scroll to next section"
-    >
-      <span></span>
-      Scroll
-    </a>
-
-  </section>
-
-  <section [id]="siteMode() === 'work' ? 'experience' : 'personal'" class="feature-section">
-    <div class="feature-title">
-      <span>01</span>
-      <h2>{{ siteMode() === 'work' ? 'Experience' : 'Personal' }}</h2>
-    </div>
-    <p>
-      {{ siteMode() === 'work' ? 'Build. Run. Improve. Reliable web systems.' : 'Volunteer forest-fire operations: prevention, training, and real incident response.' }}
-    </p>
-  </section>
-
-  <section [id]="siteMode() === 'work' ? 'projects' : 'volunteer'" class="feature-section">
-    <div class="feature-title">
-      <span>02</span>
-      <h2>{{ siteMode() === 'work' ? 'Projects' : 'Volunteer' }}</h2>
-    </div>
-    <p>
-      {{ siteMode() === 'work' ? 'APIs, dashboards, pipelines, and production tooling.' : 'Astronomy and astrophotography sessions focused on planning, tracking, and long exposures.' }}
-    </p>
-  </section>
-
-  <section [id]="siteMode() === 'work' ? 'skills' : 'hobbies'" class="feature-section skills-shell">
-    <div class="feature-title">
-      <span>03</span>
-      <h2>{{ siteMode() === 'work' ? 'Skills' : 'Hobbies' }}</h2>
-    </div>
-    <!-- <app-skills-showcase [siteMode]="siteMode()" /> -->
-  </section>
-
-  <section class="feature-section">
-    <div class="feature-title">
-      <span>04</span>
-      <h2>Contact</h2>
-    </div>
-    <p>
-      {{ siteMode() === 'work' ? 'Reach out for collaboration, inquiries, or just to say hi.' : 'Get in touch for volunteer opportunities, astronomy discussions, or motorsport chats.' }}
-    </p>
-    <br />
-    <app-contact />
-  </section>
-
-  <footer>
-    <span>
-      © {{ currentYear }} Izan Estirado
-    </span>
-
-    <span>
-      Built with Angular · Docker · Raspberry Pi
-    </span>
-  </footer>
+  <app-home-footer [currentYear]="currentYear" />
 
 </main>
 

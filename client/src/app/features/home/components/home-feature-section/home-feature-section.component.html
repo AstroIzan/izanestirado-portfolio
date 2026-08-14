@@ -1,0 +1,16 @@
+<section
+  [id]="sectionId"
+  class="feature-section"
+  [class.skills-shell]="isSkillsShell"
+>
+  <div class="feature-title">
+    <span>{{ indexLabel }}</span>
+    <h2>{{ title }}</h2>
+  </div>
+
+  @if (description) {
+    <p>{{ description }}</p>
+  }
+
+  <ng-content />
+</section>
