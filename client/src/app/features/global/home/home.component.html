@@ -1,0 +1,76 @@
+<section id="home" class="hero">
+
+  <div class="hero-background">
+    <div class="grid" aria-hidden="true">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+        @for (x of gridVerticalLines; track x) {
+          <line
+            class="grid-line grid-line-vertical"
+            [attr.x1]="x"
+            y1="-20"
+            [attr.x2]="x"
+            y2="120"
+          />
+        }
+
+        @for (y of gridHorizontalLines; track y) {
+          <line
+            class="grid-line grid-line-horizontal"
+            x1="-40"
+            [attr.y1]="y"
+            x2="140"
+            [attr.y2]="y"
+          />
+        }
+      </svg>
+    </div>
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+  </div>
+
+  <div class="hero-content">
+
+    <span class="eyebrow">
+      <span class="eyebrow-name">IZAN ESTIRADO ALFARO</span>
+      <span class="eyebrow-divider">|</span>
+      <span class="eyebrow-location">
+        <i class="fa-solid fa-earth-europe" aria-hidden="true"></i>
+        Barcelona
+      </span>
+    </span>
+
+    <h1>
+      {{ siteMode === 'work' ? 'Full-Stack.' : 'Firefight.' }}
+      <span>{{ siteMode === 'work' ? 'NET.' : 'Astro.' }}</span>
+      {{ siteMode === 'work' ? 'Database.' : 'Mountain.' }}
+      <span>{{ siteMode === 'work' ? 'Cloud.' : 'Motor.' }}</span>
+    </h1>
+
+    <p class="hero-description">
+      {{
+        siteMode === 'work'
+          ? 'Web engineer across backend, frontend, data, and cloud.'
+          : 'Volunteer wildfire firefighter, astrophotography chaser, mountain regular, and motorsport enthusiast.'
+      }}
+    </p>
+
+    <div class="status">
+      <span class="status-dot"></span>
+      <span>
+        {{ siteMode === 'work' ? '.NET APIs, Angular UIs, SQL schema design, and cloud operations.' : 'Field response, night skies, alpine trails, and engines.' }}
+      </span>
+    </div>
+
+  </div>
+
+  <a
+    class="scroll-indicator"
+    [attr.href]="siteMode === 'work' ? '#experience' : '#personal'"
+    aria-label="Scroll to next section"
+  >
+    <span></span>
+    Scroll
+  </a>
+
+</section>

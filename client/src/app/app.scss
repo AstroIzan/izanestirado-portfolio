@@ -2,3 +2,100 @@
   display: block;
   min-height: 100vh;
 }
+
+.page {
+  --bg: var(--color-page-dark);
+  --text: var(--color-home-text-dark);
+  --muted: var(--color-home-muted-dark);
+  --line: var(--color-home-line-dark);
+  --panel-bg: var(--color-home-panel-bg-dark);
+  --panel-hover: var(--color-home-panel-hover-dark);
+  --primary: var(--color-work-primary);
+  --secondary: var(--color-work-secondary);
+  --status-accent: var(--color-work-secondary);
+  --hero-top: var(--color-home-hero-work-top);
+  --hero-bottom: var(--color-home-hero-work-bottom);
+  --footer-line: var(--color-home-footer-line-dark);
+  --grid-line: var(--color-home-grid-line-dark);
+
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 15%, var(--hero-top), transparent 45%),
+    radial-gradient(circle at 90% 85%, var(--hero-bottom), transparent 45%),
+    var(--bg);
+  color: var(--text);
+  transition:
+    background 0.45s ease,
+    color 0.35s ease;
+}
+
+.page.light-mode {
+  --bg: var(--color-home-bg-light);
+  --text: var(--color-home-text-light);
+  --muted: var(--color-home-muted-light);
+  --line: var(--color-home-line-light);
+  --panel-bg: var(--color-home-panel-bg-light);
+  --panel-hover: var(--color-home-panel-hover-light);
+  --footer-line: var(--color-home-footer-line-light);
+  --grid-line: var(--color-home-grid-line-light);
+}
+
+.page[data-site-mode="work"] {
+  --primary: var(--color-work-primary);
+  --secondary: var(--color-work-secondary);
+  --status-accent: var(--color-work-secondary);
+  --hero-top: var(--color-home-hero-work-top);
+  --hero-bottom: var(--color-home-hero-work-bottom);
+}
+
+.page[data-site-mode="hobbie"] {
+  --primary: var(--color-hobbie-primary);
+  --secondary: var(--color-hobbie-secondary);
+  --status-accent: var(--color-hobbie-secondary);
+  --hero-top: var(--color-home-hero-hobbie-top);
+  --hero-bottom: var(--color-home-hero-hobbie-bottom);
+}
+
+.content-section {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 6.5rem 2rem;
+  border-top: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-title span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.04em;
+}
+
+.content-section p {
+  margin: 0;
+  max-width: 700px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.content-section-skills {
+  padding-bottom: 7rem;
+}
+
+@media (max-width: 980px) {
+  .content-section {
+    padding: 4.75rem 1.5rem;
+  }
+}

@@ -1,1 +1,55 @@
-<app-home />
+<main
+	class="page"
+	[class.dark-mode]="isDarkMode()"
+	[class.light-mode]="!isDarkMode()"
+	[attr.data-site-mode]="siteMode()"
+>
+
+	<app-navbar
+		[isDarkMode]="isDarkMode()"
+		[siteMode]="siteMode()"
+		[menuMode]="menuMode()"
+		[isTransitioningMode]="isTransitioningMode()"
+		(toggleTheme)="toggleColorMode()"
+		(siteModeChange)="switchSiteMode($event)"
+	/>
+
+	<app-home
+		[siteMode]="siteMode()"
+		[gridVerticalLines]="gridVerticalLines"
+		[gridHorizontalLines]="gridHorizontalLines"
+	/>
+
+	@if (siteMode() === 'work') {
+		<app-work-experience />
+		<app-work-projects />
+		<app-work-skills />
+	} @else {
+		<app-hobbie-personal />
+		<app-hobbie-volunteer />
+		<app-hobbie-hobbies />
+	}
+
+	<section id="contact" class="content-section">
+		<div class="section-title">
+			<span>04</span>
+			<h2>Contact</h2>
+		</div>
+
+		<p>
+			Want to get in touch with me?
+		</p>
+
+		<app-contact />
+	</section>
+
+	<app-footer [currentYear]="currentYear" />
+
+</main>
+
+@if (isTransitioningMode()) {
+	<app-mode-overlay
+		[pendingMode]="pendingMode()"
+		[transitionPhase]="modeTransitionPhase()"
+	/>
+}

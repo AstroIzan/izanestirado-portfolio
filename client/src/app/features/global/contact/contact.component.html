@@ -1,0 +1,159 @@
+<section class="contact">
+  <div class="contact-methods">
+    <button
+      type="button"
+      [class.active]="contactMethod === 'email'"
+      (click)="selectContactMethod('email')"
+    >
+      ✉️ Email
+    </button>
+
+    <button
+      type="button"
+      [class.active]="contactMethod === 'whatsapp'"
+      (click)="selectContactMethod('whatsapp')"
+    >
+      💬 WhatsApp
+    </button>
+  </div>
+
+  @if (submitted && !errorMessage) {
+    <div class="success">
+      Message sent successfully!
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="error">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <form
+    [formGroup]="contactForm"
+    (ngSubmit)="submit()"
+    novalidate
+  >
+
+    <div class="field">
+      <label for="name">
+        Name
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        autocomplete="name"
+      >
+
+      @if (
+        contactForm.controls.name.touched &&
+        contactForm.controls.name.invalid
+      ) {
+        <small>
+          Enter your name.
+        </small>
+      }
+    </div>
+
+    @if (contactMethod === 'email') {
+
+      <div class="field">
+        <label for="email">
+          Email
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+        >
+
+        @if (
+          contactForm.controls.email.touched &&
+          contactForm.controls.email.invalid
+        ) {
+          <small>
+            Enter a valid email address.
+          </small>
+        }
+      </div>
+
+    } @else {
+
+      <div class="field">
+        <label for="phone">
+          Phone / WhatsApp
+        </label>
+
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          autocomplete="tel"
+          placeholder="+34 612 345 678"
+        >
+
+        @if (
+          contactForm.controls.phone.touched &&
+          contactForm.controls.phone.invalid
+        ) {
+          <small>
+            Enter a valid phone number.
+          </small>
+        }
+      </div>
+
+    }
+
+    <div class="field">
+      <label for="message">
+        Message
+      </label>
+
+      <textarea
+        id="message"
+        formControlName="message"
+        rows="6"
+      ></textarea>
+
+      @if (
+        contactForm.controls.message.touched &&
+        contactForm.controls.message.invalid
+      ) {
+        <small>
+          Enter a message.
+        </small>
+      }
+    </div>
+
+    <!-- Honeypot: must remain invisible to users -->
+    <div class="honeypot" aria-hidden="true">
+      <label for="website">
+        Website
+      </label>
+
+      <input
+        id="website"
+        type="text"
+        formControlName="honeypot"
+        tabindex="-1"
+        autocomplete="off"
+      >
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="isSubmitting"
+    >
+      @if (isSubmitting) {
+        Sending...
+      } @else {
+        Send message
+      }
+    </button>
+
+  </form>
+</section>

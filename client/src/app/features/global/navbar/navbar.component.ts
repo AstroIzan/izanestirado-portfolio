@@ -1,0 +1,24 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.scss'
+})
+export class NavbarComponent {
+  @Input() isDarkMode = true;
+  @Input() siteMode: 'work' | 'hobbie' = 'work';
+  @Input() menuMode: 'work' | 'hobbie' = 'work';
+  @Input() isTransitioningMode = false;
+
+  @Output() readonly toggleTheme = new EventEmitter<void>();
+  @Output() readonly siteModeChange = new EventEmitter<'work' | 'hobbie'>();
+
+  onToggleTheme(): void {
+    this.toggleTheme.emit();
+  }
+
+  onSelectMode(mode: 'work' | 'hobbie'): void {
+    this.siteModeChange.emit(mode);
+  }
+}
