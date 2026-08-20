@@ -1,9 +1,20 @@
 .content-section {
 	position: relative;
-	max-width: 1000px;
+	max-width: 90%;
 	margin: 0 auto;
 	padding: 6.5rem 2rem;
-	border-top: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+	border-top: 0;
+}
+
+.content-section::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 70%;
+	height: 1px;
+	transform: translateX(-50%);
+	background: color-mix(in srgb, var(--line) 70%, transparent);
 }
 
 .section-title {
@@ -11,6 +22,8 @@
 	align-items: baseline;
 	gap: 1rem;
 	margin-bottom: 1rem;
+	margin-inline: auto;
+	max-width: 65%;
 }
 
 .section-title span {
