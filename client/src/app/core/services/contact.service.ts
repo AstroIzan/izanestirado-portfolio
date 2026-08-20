@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, timeout } from 'rxjs';
 
 export type ContactMethod = 'email' | 'whatsapp';
 
@@ -39,6 +39,8 @@ export class ContactService {
     return this.http.post<ContactResponse>(
       '/api/contact',
       contact
+    ).pipe(
+      timeout({ each: 15_000 })
     );
   }
 }

@@ -1,15 +1,29 @@
-<section class="contact">
-  <div class="contact-methods">
+<div class="section-title">
+  <span>04</span>
+  <h2>Contact</h2>
+</div>
+
+<p class="contact-intro">
+  Want to get in touch with me?
+</p>
+
+<section class="contact-form">
+  <div
+    class="contact-methods"
+    [class.is-whatsapp]="contactMethod === 'whatsapp'"
+  >
     <button
       type="button"
+      [attr.aria-pressed]="contactMethod === 'email'"
       [class.active]="contactMethod === 'email'"
       (click)="selectContactMethod('email')"
     >
-      ✉️ Email
+      ✉️ Mail
     </button>
 
     <button
       type="button"
+      [attr.aria-pressed]="contactMethod === 'whatsapp'"
       [class.active]="contactMethod === 'whatsapp'"
       (click)="selectContactMethod('whatsapp')"
     >
@@ -17,7 +31,7 @@
     </button>
   </div>
 
-  @if (submitted && !errorMessage) {
+  @if (messageSent && !errorMessage) {
     <div class="success">
       Message sent successfully!
     </div>

@@ -4,6 +4,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { finalize } from 'rxjs';
 
 import {
   ContactMethod,
@@ -24,6 +25,7 @@ export class ContactComponent {
 
   isSubmitting = false;
   submitted = false;
+  messageSent = false;
   errorMessage = '';
 
   readonly contactForm = this.fb.nonNullable.group({
@@ -33,6 +35,7 @@ export class ContactComponent {
     ]],
 
     email: ['', [
+      Validators.required,
       Validators.email,
       Validators.maxLength(254)
     ]],
@@ -53,6 +56,7 @@ export class ContactComponent {
     this.contactMethod = method;
 
     this.submitted = false;
+    this.messageSent = false;
     this.errorMessage = '';
 
     const emailControl = this.contactForm.controls.email;
@@ -81,6 +85,7 @@ export class ContactComponent {
 
   submit(): void {
     this.submitted = true;
+    this.messageSent = false;
     this.errorMessage = '';
 
     if (this.contactForm.invalid || this.isSubmitting) {
@@ -108,18 +113,20 @@ export class ContactComponent {
           honeypot: value.honeypot
         };
 
-    this.contactService.sendContact(request).subscribe({
-      next: () => {
+    this.contactService.sendContact(request).pipe(
+      finalize(() => {
         this.isSubmitting = false;
+      })
+    ).subscribe({
+      next: () => {
         this.contactForm.reset();
         this.contactMethod = 'email';
         this.selectContactMethod('email');
+        this.messageSent = true;
         this.submitted = true;
       },
 
       error: (error) => {
-        this.isSubmitting = false;
-
         if (error.status === 429) {
           this.errorMessage =
             'You have sent too many requests. Please try again later.';

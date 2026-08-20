@@ -1,4 +1,5 @@
 const TELEGRAM_API = 'https://api.telegram.org';
+const TELEGRAM_REQUEST_TIMEOUT = 10_000;
 
 async function sendTelegramMessage(message) {
     const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -12,6 +13,7 @@ async function sendTelegramMessage(message) {
         `${TELEGRAM_API}/bot${token}/sendMessage`,
         {
             method: 'POST',
+            signal: AbortSignal.timeout(TELEGRAM_REQUEST_TIMEOUT),
             headers: {
                 'Content-Type': 'application/json'
             },
