@@ -66,6 +66,16 @@
 
   /* Shared shadows */
   --shadow-nav-elevated: 0 4px 14px rgba(0, 0, 0, 0.14);
+
+  /* Git graph node palette */
+  --color-graph-1: #e0a458;
+  --color-graph-2: #ef767a;
+  --color-graph-3: #68a691;
+  --color-graph-4: #8f7ff0;
+  --color-graph-5: #6bd2ff;
+
+  /* Typography */
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", "Fira Code", Consolas, monospace;
 }
 
 * {

@@ -7,4 +7,78 @@
   <p>
     Build. Run. Improve. Reliable web systems.
   </p>
+
+  <div class="git-graph">
+    <ol class="git-rows">
+      @for (item of graph; track item.row.id) {
+        <li
+          class="git-row"
+          [class]="'branch--' + item.row.branch"
+          [class.git-row--point]="!item.row.role"
+          [class.git-row--merge]="item.row.merge"
+          [class.git-row--head]="item.row.head"
+          [class.is-open]="isOpen(item.row.id)"
+        >
+          <div class="rail" aria-hidden="true">
+            @if (item.masterTop) { <span class="line line--master line--top"></span> }
+            @if (item.masterBottom) { <span class="line line--master line--bottom"></span> }
+            @if (item.branchTop) { <span class="line line--branch line--top"></span> }
+            @if (item.branchBottom) { <span class="line line--branch line--bottom"></span> }
+            @if (item.openEnd) { <span class="line line--branch line--open"></span> }
+            @if (item.corner) {
+              <span class="corner" [class.corner--in]="item.corner === 'in'"></span>
+            }
+            @if (item.masterNode) { <span class="node node--master"></span> }
+            @if (item.branchNode) { <span class="node node--branch"></span> }
+          </div>
+
+          @if (item.row.role) {
+            <div class="entry">
+              <div class="entry-head">
+                <div class="entry-labels">
+                  <h3>{{ item.row.role }}</h3>
+                  <p class="entry-meta">
+                    <a
+                      class="entry-company"
+                      [href]="item.row.companyUrl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {{ item.row.company }}
+                      <span class="entry-company-arrow" aria-hidden="true"></span>
+                    </a>
+                    <span class="entry-sep" aria-hidden="true">·</span>
+                    {{ item.row.period }}
+                  </p>
+                  <p class="entry-summary">{{ item.row.summary }}</p>
+                </div>
+
+                <button
+                  type="button"
+                  class="entry-toggle"
+                  [attr.aria-expanded]="isOpen(item.row.id)"
+                  [attr.aria-controls]="'detail-' + item.row.id"
+                  [attr.aria-label]="'More about ' + item.row.role"
+                  (click)="toggle(item.row.id)"
+                ></button>
+              </div>
+
+              <div class="entry-detail" [id]="'detail-' + item.row.id" [hidden]="!isOpen(item.row.id)">
+                <ul class="entry-bullets">
+                  @for (bullet of item.row.bullets; track bullet) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+                <ul class="entry-tags">
+                  @for (tag of item.row.tags; track tag) {
+                    <li>{{ tag }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          }
+        </li>
+      }
+    </ol>
+  </div>
 </section>

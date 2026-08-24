@@ -32,8 +32,462 @@
 	color: var(--muted);
 }
 
+.git-graph {
+	--rail-w: 88px;
+	--lane-master: 18px;
+	--lane-branch: 58px;
+	--node-y: 30px;
+	--node-size: 12px;
+	--corner-h: 24px;
+	--line-w: 2px;
+	--master-color: color-mix(in srgb, var(--text) 26%, transparent);
+	--branch-color: var(--primary);
+
+	margin-top: 3.25rem;
+}
+
+.git-rows {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.git-row {
+	display: grid;
+	grid-template-columns: var(--rail-w) minmax(0, 1fr);
+}
+
+.git-row--point {
+	/* Node sits where the incoming curve lands, so both rails stay continuous. */
+	--node-y: var(--corner-h);
+
+	min-height: 38px;
+}
+
+.branch--polinya {
+	--branch-color: var(--color-graph-1);
+}
+
+.branch--tauli {
+	--branch-color: var(--color-graph-2);
+}
+
+.branch--compettia {
+	--branch-color: var(--color-graph-3);
+}
+
+.branch--vueling {
+	--branch-color: var(--color-graph-5);
+}
+
+.rail {
+	position: relative;
+}
+
+.line {
+	position: absolute;
+	width: var(--line-w);
+	transform: translateX(-50%);
+}
+
+.line--master {
+	left: var(--lane-master);
+	background: var(--master-color);
+}
+
+.line--branch {
+	left: var(--lane-branch);
+	background: color-mix(in srgb, var(--branch-color) 65%, transparent);
+}
+
+/* Joints overlap by 1px so the rails stay solid at any zoom level. */
+.line--top {
+	top: -1px;
+	height: calc(var(--node-y) + 1px);
+}
+
+.line--bottom {
+	top: var(--node-y);
+	bottom: -1px;
+}
+
+.git-row--merge .line--branch.line--top {
+	height: calc(var(--node-y) - var(--corner-h) + 1px);
+}
+
+.line--open {
+	top: var(--node-y);
+	height: 34px;
+	background: repeating-linear-gradient(to bottom, var(--branch-color) 0 5px, transparent 5px 11px);
+	opacity: 0.5;
+}
+
+.corner {
+	position: absolute;
+	/* Content-box keeps every border centred on its lane coordinate. */
+	box-sizing: content-box;
+	left: calc(var(--lane-master) - var(--line-w) / 2);
+	top: calc(var(--node-y) - var(--corner-h));
+	width: calc(var(--lane-branch) - var(--lane-master));
+	height: calc(var(--corner-h) - var(--line-w) / 2);
+	border-bottom: var(--line-w) solid color-mix(in srgb, var(--branch-color) 65%, transparent);
+	border-left: var(--line-w) solid color-mix(in srgb, var(--branch-color) 65%, transparent);
+	border-bottom-left-radius: 12px;
+}
+
+.corner--in {
+	border-left: 0;
+	border-bottom-left-radius: 0;
+	border-right: var(--line-w) solid color-mix(in srgb, var(--branch-color) 65%, transparent);
+	border-bottom-right-radius: 12px;
+}
+
+.node {
+	position: absolute;
+	top: var(--node-y);
+	width: var(--node-size);
+	height: var(--node-size);
+	border-radius: 999px;
+	background: var(--bg);
+	transform: translate(-50%, -50%);
+}
+
+.node--master {
+	left: var(--lane-master);
+	border: var(--line-w) solid var(--master-color);
+}
+
+.node--branch {
+	left: var(--lane-branch);
+	border: 2px solid var(--branch-color);
+	box-shadow: 0 0 0 4px color-mix(in srgb, var(--branch-color) 12%, transparent);
+	transition: box-shadow 0.25s ease;
+}
+
+.git-row.is-open .node--branch {
+	background: var(--branch-color);
+	box-shadow: 0 0 0 6px color-mix(in srgb, var(--branch-color) 18%, transparent);
+}
+
+.git-row--head .node--branch {
+	border-style: dashed;
+	box-shadow: none;
+	opacity: 0.6;
+}
+
+.entry {
+	/* Aligns the role title with its node on the rail. */
+	padding: 1.05rem 0 1.5rem;
+}
+
+.entry-head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1.5rem;
+}
+
+.entry-labels h3 {
+	margin: 0;
+	font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+}
+
+.entry-meta {
+	margin: 0.4rem 0 0;
+	font-size: 0.78rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: color-mix(in srgb, var(--branch-color) 55%, var(--muted));
+}
+
+.entry-sep {
+	margin: 0 0.25rem;
+	opacity: 0.6;
+}
+
+.entry-company {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	color: inherit;
+	text-decoration: none;
+}
+
+.entry-company::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 1.1rem;
+	bottom: -2px;
+	height: 1px;
+	background: currentColor;
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.25s ease;
+}
+
+.entry-company:hover,
+.entry-company:focus-visible {
+	color: var(--branch-color);
+}
+
+.entry-company:hover::after,
+.entry-company:focus-visible::after {
+	transform: scaleX(1);
+}
+
+.entry-company-arrow {
+	position: relative;
+	width: 10px;
+	height: 10px;
+	transition: transform 0.25s ease;
+}
+
+.entry-company-arrow::before {
+	content: '';
+	position: absolute;
+	left: 1px;
+	bottom: 1px;
+	width: 11px;
+	height: 1.5px;
+	background: currentColor;
+	transform-origin: left center;
+	transform: rotate(-45deg);
+}
+
+.entry-company-arrow::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 7px;
+	height: 7px;
+	border-top: 1.5px solid currentColor;
+	border-right: 1.5px solid currentColor;
+}
+
+.entry-company:hover .entry-company-arrow {
+	transform: translate(2px, -2px);
+}
+
+.entry-summary {
+	margin: 0.65rem 0 0;
+	max-width: 58ch;
+	font-size: 0.95rem;
+	line-height: 1.6;
+	color: var(--muted);
+}
+
+.entry-toggle {
+	position: relative;
+	flex: 0 0 auto;
+	margin-top: 0.2rem;
+	width: 34px;
+	height: 34px;
+	border: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
+	border-radius: 999px;
+	background: transparent;
+	color: var(--muted);
+	cursor: pointer;
+	transition:
+		color 0.2s ease,
+		border-color 0.2s ease,
+		background 0.2s ease;
+}
+
+.entry-toggle::before,
+.entry-toggle::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -1px 0 0 -6px;
+	width: 12px;
+	height: 2px;
+	border-radius: 2px;
+	background: currentColor;
+}
+
+.entry-toggle::after {
+	transform: rotate(90deg);
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.git-row:hover .entry-toggle,
+.entry-toggle:hover,
+.entry-toggle:focus-visible {
+	color: color-mix(in srgb, var(--branch-color) 75%, var(--text));
+	border-color: color-mix(in srgb, var(--branch-color) 55%, transparent);
+	background: color-mix(in srgb, var(--branch-color) 8%, transparent);
+}
+
+.git-row.is-open .entry-toggle {
+	color: var(--branch-color);
+	border-color: color-mix(in srgb, var(--branch-color) 60%, transparent);
+	background: color-mix(in srgb, var(--branch-color) 10%, transparent);
+}
+
+.git-row.is-open .entry-toggle::after {
+	transform: rotate(0deg);
+}
+
+.entry-detail {
+	margin-top: 1.1rem;
+	padding-left: 1rem;
+	border-left: 1px solid color-mix(in srgb, var(--branch-color) 35%, transparent);
+}
+
+.entry-detail[hidden] {
+	display: none;
+}
+
+.entry-bullets {
+	display: grid;
+	gap: 0.4rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.entry-bullets li {
+	max-width: 62ch;
+	font-size: 0.9rem;
+	line-height: 1.6;
+	color: var(--muted);
+}
+
+.entry-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin: 0.9rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.entry-tags li {
+	padding: 0.22rem 0.55rem;
+	border: 1px solid color-mix(in srgb, var(--branch-color) 35%, transparent);
+	font-size: 0.7rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: color-mix(in srgb, var(--branch-color) 70%, var(--text));
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.entry-toggle,
+	.entry-toggle::after,
+	.entry-company::after,
+	.entry-company-arrow,
+	.node--branch {
+		transition: none;
+	}
+}
+
+@media (max-width: 1180px) {
+	.git-graph {
+		--rail-w: 76px;
+		--lane-master: 16px;
+		--lane-branch: 50px;
+	}
+}
+
 @media (max-width: 980px) {
 	.content-section {
-		padding: 4.75rem 1.5rem;
+		padding: 5rem 1.5rem;
+	}
+
+	.git-graph {
+		--rail-w: 62px;
+		--lane-master: 14px;
+		--lane-branch: 42px;
+		--node-y: 26px;
+		--corner-h: 20px;
+	}
+
+	.entry {
+		padding: 0.9rem 0 1.35rem;
+	}
+
+	.entry-head {
+		gap: 1rem;
+	}
+
+	.entry-toggle {
+		width: 32px;
+		height: 32px;
+	}
+
+	.entry-summary {
+		font-size: 0.92rem;
+	}
+}
+
+@media (max-width: 620px) {
+	.content-section {
+		padding: 3.75rem 1.15rem;
+	}
+
+	.git-graph {
+		--rail-w: 42px;
+		--lane-master: 10px;
+		--lane-branch: 30px;
+		--node-y: 22px;
+		--node-size: 10px;
+		--corner-h: 16px;
+
+		margin-top: 2.5rem;
+	}
+
+	.git-row--point {
+		min-height: 30px;
+	}
+
+	.entry {
+		padding: 0.7rem 0 1.15rem;
+	}
+
+	.entry-head {
+		gap: 0.75rem;
+	}
+
+	.entry-labels h3 {
+		font-size: 1.05rem;
+	}
+
+	.entry-meta {
+		margin-top: 0.35rem;
+		font-size: 0.7rem;
+		letter-spacing: 0.1em;
+	}
+
+	.entry-summary {
+		margin-top: 0.5rem;
+		font-size: 0.88rem;
+	}
+
+	.entry-toggle {
+		margin-top: 0;
+		width: 30px;
+		height: 30px;
+	}
+
+	.entry-toggle::before,
+	.entry-toggle::after {
+		margin: -1px 0 0 -5px;
+		width: 10px;
+	}
+
+	.entry-detail {
+		margin-top: 0.9rem;
+		padding-left: 0.85rem;
+	}
+
+	.entry-bullets li {
+		font-size: 0.86rem;
 	}
 }
