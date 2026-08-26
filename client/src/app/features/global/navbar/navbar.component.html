@@ -1,4 +1,4 @@
-<header class="top-menu">
+<header class="top-menu" [class.is-menu-open]="isMenuOpen()">
 
   <button
     type="button"
@@ -14,18 +14,18 @@
     </span>
   </button>
 
-  <nav class="menu-panel panel-nav" aria-label="Main navigation">
-    <a href="#home">Home</a>
-    <a [attr.href]="siteMode === 'work' ? '#experience' : '#personal'">
+  <nav id="main-navigation" class="menu-panel panel-nav" aria-label="Main navigation">
+    <a href="#home" (click)="closeMenu()">Home</a>
+    <a [attr.href]="siteMode === 'work' ? '#experience' : '#personal'" (click)="closeMenu()">
       {{ siteMode === 'work' ? 'Experience' : 'Personal' }}
     </a>
-    <a [attr.href]="siteMode === 'work' ? '#projects' : '#volunteer'">
+    <a [attr.href]="siteMode === 'work' ? '#projects' : '#volunteer'" (click)="closeMenu()">
       {{ siteMode === 'work' ? 'Projects' : 'Volunteer' }}
     </a>
-    <a [attr.href]="siteMode === 'work' ? '#skills' : '#hobbies'">
+    <a [attr.href]="siteMode === 'work' ? '#skills' : '#hobbies'" (click)="closeMenu()">
       {{ siteMode === 'work' ? 'Skills' : 'Hobbies' }}
     </a>
-    <a href="#contact">Contact</a>
+    <a href="#contact" (click)="closeMenu()">Contact</a>
   </nav>
 
   <div
@@ -51,5 +51,18 @@
       Hobby
     </button>
   </div>
+
+  <button
+    type="button"
+    class="menu-toggle"
+    [attr.aria-expanded]="isMenuOpen()"
+    aria-controls="main-navigation"
+    aria-label="Toggle navigation menu"
+    (click)="toggleMenu()"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
 </header>

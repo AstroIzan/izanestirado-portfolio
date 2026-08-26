@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -14,11 +14,22 @@ export class NavbarComponent {
   @Output() readonly toggleTheme = new EventEmitter<void>();
   @Output() readonly siteModeChange = new EventEmitter<'work' | 'hobbie'>();
 
+  readonly isMenuOpen = signal(false);
+
   onToggleTheme(): void {
     this.toggleTheme.emit();
   }
 
   onSelectMode(mode: 'work' | 'hobbie'): void {
+    this.isMenuOpen.set(false);
     this.siteModeChange.emit(mode);
+  }
+
+  toggleMenu(): void {
+    this.isMenuOpen.update((isOpen) => !isOpen);
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
   }
 }
