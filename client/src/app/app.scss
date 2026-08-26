@@ -19,6 +19,7 @@
   --grid-line: var(--color-home-grid-line-dark);
 
   min-height: 100vh;
+  overflow-x: clip;
   background:
     radial-gradient(circle at 10% 15%, var(--hero-top), transparent 45%),
     radial-gradient(circle at 90% 85%, var(--hero-bottom), transparent 45%),

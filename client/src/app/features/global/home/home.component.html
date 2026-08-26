@@ -41,10 +41,14 @@
     </span>
 
     <h1>
-      {{ siteMode === 'work' ? 'Full-Stack.' : 'Firefight.' }}
-      <span>{{ siteMode === 'work' ? 'NET.' : 'Astro.' }}</span>
-      {{ siteMode === 'work' ? 'Database.' : 'Mountain.' }}
-      <span>{{ siteMode === 'work' ? 'Cloud.' : 'Motor.' }}</span>
+      <span class="hero-title-line">
+        <span class="hero-title-word">{{ siteMode === 'work' ? 'Full-Stack.' : 'Firefight.' }}</span>
+        <span class="hero-title-word hero-title-accent">{{ siteMode === 'work' ? 'NET.' : 'Astro.' }}</span>
+      </span>
+      <span class="hero-title-line">
+        <span class="hero-title-word">{{ siteMode === 'work' ? 'Database.' : 'Mountain.' }}</span>
+        <span class="hero-title-word hero-title-accent">{{ siteMode === 'work' ? 'Cloud.' : 'Motor.' }}</span>
+      </span>
     </h1>
 
     <p class="hero-description">
