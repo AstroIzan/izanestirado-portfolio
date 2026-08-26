@@ -4,78 +4,42 @@
     <h2>Skills</h2>
   </div>
 
-  <div class="skills-showcase">
-    <article class="skills-card skills-card-intro">
-      <span class="skills-kicker">
-        Core profile
-      </span>
+  <div class="skills-intro">
+    <p class="skills-eyebrow">Capability ledger / 04 domains</p>
+    <p>
+      Full-stack work grounded in systems that have to operate reliably after deployment, not just look right in a demo.
+    </p>
+  </div>
 
-      <h3>
-        Engineering across the full web stack.
-      </h3>
-
-      <p>
-        Backend services, UI delivery, database design, and cloud operations in one technical profile.
-      </p>
-
-      <span class="skills-card-arrow" aria-hidden="true">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      </span>
-    </article>
-
-    <div class="skills-mini-grid">
-      <article class="skills-card skills-card-mini">
-        <i class="fa-solid fa-code" aria-hidden="true"></i>
-      </article>
-
-      <article class="skills-card skills-card-mini">
-        <i class="fa-solid fa-database" aria-hidden="true"></i>
-      </article>
-
-      <article class="skills-card skills-card-mini">
-        <i class="fa-solid fa-cloud" aria-hidden="true"></i>
-      </article>
-
-      <article class="skills-card skills-card-mini">
-        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
-      </article>
+  <div class="skills-ledger">
+    <div class="skills-ledger-head" aria-hidden="true">
+      <span>Domain</span>
+      <span>What I build</span>
+      <span>Working stack</span>
+      <span>Primary focus</span>
     </div>
 
-    <article class="skills-card skills-card-highlight">
-      <h3>
-        Systems that ship, scale, and stay observable.
-      </h3>
-    </article>
+    @for (domain of domains; track domain.code) {
+      <article class="skill-row" [class]="'skill-row skill-row--' + domain.tone">
+        <div class="skill-domain">
+          <span class="skill-code">{{ domain.code }}</span>
+          <i [class]="domain.icon" aria-hidden="true"></i>
+          <h3>{{ domain.title }}</h3>
+        </div>
 
-    <article class="skills-card skills-card-stack">
-      <span class="skills-kicker">
-        Stack
-      </span>
+        <p class="skill-summary">{{ domain.summary }}</p>
 
-      <div class="skills-pill-grid">
-        <span>.NET</span>
-        <span>Angular</span>
-        <span>SQL</span>
-        <span>Docker</span>
-        <span>CI/CD</span>
-        <span>Cloud</span>
-        <span>APIs</span>
-        <span>Monitoring</span>
-      </div>
-    </article>
+        <ul class="skill-stack" aria-label="{{ domain.title }} stack">
+          @for (tool of domain.stack; track tool) {
+            <li>{{ tool }}</li>
+          }
+        </ul>
 
-    <article class="skills-card skills-card-focus">
-      <span class="skills-kicker">
-        Focus
-      </span>
-
-      <p>
-        APIs, dashboards, pipelines, production tooling, and operational reliability.
-      </p>
-
-      <span class="skills-card-arrow" aria-hidden="true">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      </span>
-    </article>
+        <div class="skill-focus">
+          <span>Focus</span>
+          <strong>{{ domain.focus }}</strong>
+        </div>
+      </article>
+    }
   </div>
 </section>
