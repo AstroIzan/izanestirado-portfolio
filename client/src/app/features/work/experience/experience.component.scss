@@ -19,6 +19,7 @@
 	letter-spacing: 0.18em;
 }
 
+
 .section-title h2 {
 	margin: 0;
 	font-size: clamp(2rem, 4vw, 3.5rem);
@@ -33,17 +34,18 @@
 }
 
 .git-graph {
-	--rail-w: 88px;
-	--lane-master: 18px;
-	--lane-branch: 58px;
-	--node-y: 30px;
-	--node-size: 12px;
-	--corner-h: 24px;
-	--line-w: 2px;
+	--rail-w: clamp(3.5rem, 8vw, 5.5rem);
+	--master-x: 30%;
+	--branch-x: 70%;
+	--node-y-base: clamp(22px, 3vw, 30px);
+	--node-y: var(--node-y-base);
+	--node-size: clamp(10px, 1.2vw, 12px);
+	--curve-height: clamp(16px, 2.4vw, 24px);
+	--line-width: 0.125rem;
 	--master-color: color-mix(in srgb, var(--text) 26%, transparent);
-	--branch-color: var(--primary);
-
 	margin-top: 3.25rem;
+	position: relative;
+	overflow-anchor: none;
 }
 
 .git-rows {
@@ -53,23 +55,23 @@
 }
 
 .git-row {
+	position: relative;
 	display: grid;
 	grid-template-columns: var(--rail-w) minmax(0, 1fr);
 }
 
 .git-row--point {
-	/* Node sits where the incoming curve lands, so both rails stay continuous. */
-	--node-y: var(--corner-h);
+	--node-y: var(--curve-height);
+	min-height: calc(var(--curve-height) + var(--node-size));
+}
 
-	min-height: 38px;
+.git-row--head {
+	--node-y: var(--node-y-base);
+	min-height: calc(var(--node-y) + var(--node-size) / 2);
 }
 
 .branch--polinya {
 	--branch-color: var(--color-graph-1);
-}
-
-.branch--tauli {
-	--branch-color: var(--color-graph-2);
 }
 
 .branch--compettia {
@@ -84,99 +86,103 @@
 	position: relative;
 }
 
-.line {
+.line,
+.corner,
+.node {
 	position: absolute;
-	width: var(--line-w);
+	z-index: 1;
+}
+
+.line {
+	box-sizing: border-box;
+	width: 0;
+	border-left: var(--line-width) solid transparent;
 	transform: translateX(-50%);
 }
 
 .line--master {
-	left: var(--lane-master);
-	background: var(--master-color);
+	left: var(--master-x);
+	border-left-color: var(--master-color);
 }
 
 .line--branch {
-	left: var(--lane-branch);
-	background: color-mix(in srgb, var(--branch-color) 65%, transparent);
+	left: var(--branch-x);
+	border-left-color: color-mix(in srgb, var(--branch-color) 65%, transparent);
 }
 
-/* Joints overlap by 1px so the rails stay solid at any zoom level. */
 .line--top {
-	top: -1px;
-	height: calc(var(--node-y) + 1px);
+	top: 0;
+	height: var(--node-y);
 }
 
 .line--bottom {
 	top: var(--node-y);
-	bottom: -1px;
-}
-
-.git-row--merge .line--branch.line--top {
-	height: calc(var(--node-y) - var(--corner-h) + 1px);
+	bottom: 0;
 }
 
 .line--open {
-	top: var(--node-y);
-	height: 34px;
+	top: 0;
+	height: var(--node-y);
+	border-left: 0;
+	width: var(--line-width);
 	background: repeating-linear-gradient(to bottom, var(--branch-color) 0 5px, transparent 5px 11px);
-	opacity: 0.5;
+	opacity: 0.65;
+}
+
+.git-row--head .line--branch.line--top {
+	display: none;
+}
+
+.git-row--merge .line--branch.line--top {
+	height: calc(var(--node-y) - var(--curve-height));
 }
 
 .corner {
-	position: absolute;
-	/* Content-box keeps every border centred on its lane coordinate. */
-	box-sizing: content-box;
-	left: calc(var(--lane-master) - var(--line-w) / 2);
-	top: calc(var(--node-y) - var(--corner-h));
-	width: calc(var(--lane-branch) - var(--lane-master));
-	height: calc(var(--corner-h) - var(--line-w) / 2);
-	border-bottom: var(--line-w) solid color-mix(in srgb, var(--branch-color) 65%, transparent);
-	border-left: var(--line-w) solid color-mix(in srgb, var(--branch-color) 65%, transparent);
+	box-sizing: border-box;
+	left: calc(var(--master-x) - var(--line-width) / 2);
+	top: calc(var(--node-y) - var(--curve-height));
+	width: calc(var(--branch-x) - var(--master-x) + var(--line-width));
+	height: var(--curve-height);
+	border-bottom: var(--line-width) solid color-mix(in srgb, var(--branch-color) 65%, transparent);
+	border-left: var(--line-width) solid color-mix(in srgb, var(--branch-color) 65%, transparent);
 	border-bottom-left-radius: 12px;
 }
 
 .corner--in {
 	border-left: 0;
 	border-bottom-left-radius: 0;
-	border-right: var(--line-w) solid color-mix(in srgb, var(--branch-color) 65%, transparent);
+	border-right: var(--line-width) solid color-mix(in srgb, var(--branch-color) 65%, transparent);
 	border-bottom-right-radius: 12px;
 }
 
 .node {
-	position: absolute;
+	box-sizing: border-box;
 	top: var(--node-y);
+	left: var(--branch-x);
 	width: var(--node-size);
 	height: var(--node-size);
-	border-radius: 999px;
+	border: var(--line-width) solid var(--branch-color);
+	border-radius: 50%;
 	background: var(--bg);
 	transform: translate(-50%, -50%);
 }
 
 .node--master {
-	left: var(--lane-master);
-	border: var(--line-w) solid var(--master-color);
+	left: var(--master-x);
+	border-color: var(--master-color);
 }
 
-.node--branch {
-	left: var(--lane-branch);
-	border: 2px solid var(--branch-color);
-	box-shadow: 0 0 0 4px color-mix(in srgb, var(--branch-color) 12%, transparent);
-	transition: box-shadow 0.25s ease;
-}
-
-.git-row.is-open .node--branch {
-	background: var(--branch-color);
-	box-shadow: 0 0 0 6px color-mix(in srgb, var(--branch-color) 18%, transparent);
+.node--start {
+	border: 0;
+	background: color-mix(in srgb, var(--text) 26%, var(--bg));
 }
 
 .git-row--head .node--branch {
 	border-style: dashed;
-	box-shadow: none;
-	opacity: 0.6;
 }
 
 .entry {
-	/* Aligns the role title with its node on the rail. */
+	grid-column: 2;
 	padding: 1.05rem 0 1.5rem;
 }
 
@@ -336,13 +342,35 @@
 }
 
 .entry-detail {
-	margin-top: 1.1rem;
+	display: grid;
+	grid-template-rows: 0fr;
+	margin-top: 0;
 	padding-left: 1rem;
+	overflow: hidden;
 	border-left: 1px solid color-mix(in srgb, var(--branch-color) 35%, transparent);
+	opacity: 0;
+	transition:
+		grid-template-rows 0.45s ease,
+		margin-top 0.35s ease,
+		opacity 0.25s ease;
+}
+
+.entry-detail > * {
+	min-height: 0;
+}
+
+.entry-detail-content {
+	min-height: 0;
 }
 
 .entry-detail[hidden] {
-	display: none;
+	display: grid;
+}
+
+.entry-detail:not([hidden]) {
+	grid-template-rows: 1fr;
+	margin-top: 1.1rem;
+	opacity: 1;
 }
 
 .entry-bullets {
@@ -382,17 +410,12 @@
 	.entry-toggle,
 	.entry-toggle::after,
 	.entry-company::after,
-	.entry-company-arrow,
-	.node--branch {
+	.entry-company-arrow {
 		transition: none;
 	}
-}
 
-@media (max-width: 1180px) {
-	.git-graph {
-		--rail-w: 76px;
-		--lane-master: 16px;
-		--lane-branch: 50px;
+	.entry-detail {
+		transition: none;
 	}
 }
 
@@ -402,11 +425,7 @@
 	}
 
 	.git-graph {
-		--rail-w: 62px;
-		--lane-master: 14px;
-		--lane-branch: 42px;
-		--node-y: 26px;
-		--corner-h: 20px;
+		--rail-w: clamp(3.5rem, 8vw, 5.5rem);
 	}
 
 	.entry {
@@ -433,18 +452,9 @@
 	}
 
 	.git-graph {
-		--rail-w: 42px;
-		--lane-master: 10px;
-		--lane-branch: 30px;
-		--node-y: 22px;
-		--node-size: 10px;
-		--corner-h: 16px;
+		--rail-w: 3.5rem;
 
 		margin-top: 2.5rem;
-	}
-
-	.git-row--point {
-		min-height: 30px;
 	}
 
 	.entry {

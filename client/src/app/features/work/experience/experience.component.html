@@ -12,8 +12,9 @@
     <ol class="git-rows">
       @for (item of graph; track item.row.id) {
         <li
+          #graphRow
           class="git-row"
-          [class]="'branch--' + item.row.branch"
+          [class]="'git-row branch--' + item.row.branch"
           [class.git-row--point]="!item.row.role"
           [class.git-row--merge]="item.row.merge"
           [class.git-row--head]="item.row.head"
@@ -28,7 +29,9 @@
             @if (item.corner) {
               <span class="corner" [class.corner--in]="item.corner === 'in'"></span>
             }
-            @if (item.masterNode) { <span class="node node--master"></span> }
+            @if (item.masterNode) {
+              <span class="node node--master" [class.node--start]="item.row.id === 'init'"></span>
+            }
             @if (item.branchNode) { <span class="node node--branch"></span> }
           </div>
 
@@ -64,16 +67,18 @@
               </div>
 
               <div class="entry-detail" [id]="'detail-' + item.row.id" [hidden]="!isOpen(item.row.id)">
-                <ul class="entry-bullets">
-                  @for (bullet of item.row.bullets; track bullet) {
-                    <li>{{ bullet }}</li>
-                  }
-                </ul>
-                <ul class="entry-tags">
-                  @for (tag of item.row.tags; track tag) {
-                    <li>{{ tag }}</li>
-                  }
-                </ul>
+                <div class="entry-detail-content">
+                  <ul class="entry-bullets">
+                    @for (bullet of item.row.bullets; track bullet) {
+                      <li>{{ bullet }}</li>
+                    }
+                  </ul>
+                  <ul class="entry-tags">
+                    @for (tag of item.row.tags; track tag) {
+                      <li>{{ tag }}</li>
+                    }
+                  </ul>
+                </div>
               </div>
             </div>
           }
