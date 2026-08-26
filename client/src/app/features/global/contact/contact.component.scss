@@ -1,7 +1,9 @@
 :host {
   display: block;
   position: relative;
-  max-width: 70%;
+  width: min(100%, 960px);
+  max-width: none;
+  margin-inline: auto;
   border-top: 0;
 }
 
@@ -10,7 +12,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 70%;
+  width: 100%;
   height: 1px;
   transform: translateX(-50%);
   background: color-mix(in srgb, var(--line) 70%, transparent);
@@ -20,8 +22,8 @@
   display: flex;
   align-items: baseline;
   gap: 1rem;
-  max-width: 65%;
-  margin: 0 auto 1rem;
+  max-width: none;
+  margin: 0 0 1rem;
 }
 
 .section-title span {
@@ -37,18 +39,24 @@
 }
 
 .contact-intro {
-  width: 65%;
-  margin: 0 auto 2rem;
+  max-width: 58ch;
+  margin: 0 0 2rem;
   line-height: 1.75;
   color: var(--muted);
 }
 
 .contact-form {
-	padding: 2rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
 	border: 1px solid var(--line);
 	border-radius: 0;
 	background: color-mix(in srgb, var(--panel-bg) 100%, transparent);
 	backdrop-filter: blur(10px);
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
 .contact-methods {
@@ -103,7 +111,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+}
+
+.field:has(textarea) {
+  grid-column: 1 / -1;
 }
 
 .field label {
@@ -159,6 +171,7 @@ small {
 }
 
 form > button {
+  grid-column: 1 / -1;
   width: 100%;
   padding: 1rem;
   border: 1px solid var(--text);
@@ -201,13 +214,23 @@ form > button:disabled {
   overflow: hidden;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1100px) {
   :host {
-    max-width: 100%;
+    width: min(100%, 760px);
   }
 
   :host::before {
-    width: 85%;
+    width: 100%;
+  }
+
+  .contact-form {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  :host {
+    width: 100%;
   }
 
   .section-title,
@@ -221,7 +244,30 @@ form > button:disabled {
     padding: 1.25rem;
   }
 
+  form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .field:has(textarea) {
+    grid-column: auto;
+  }
+
   .contact-methods {
-    grid-template-columns: repeat(2, 1fr);
+    min-height: 52px;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-methods button {
+    min-height: 52px;
+    font-size: 0.7rem;
+  }
+
+  textarea {
+    min-height: 130px;
+  }
+
+  form > button {
+    min-height: 52px;
   }
 }
