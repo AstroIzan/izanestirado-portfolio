@@ -246,37 +246,20 @@
 	transform: scaleX(1);
 }
 
-.entry-company-arrow {
-	position: relative;
-	width: 10px;
-	height: 10px;
+
+.entry-company-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 0.9rem;
+	height: 0.9rem;
+	font-size: 1.1rem;
+	line-height: 1;
 	transition: transform 0.25s ease;
 }
 
-.entry-company-arrow::before {
-	content: '';
-	position: absolute;
-	left: 1px;
-	bottom: 1px;
-	width: 11px;
-	height: 1.5px;
-	background: currentColor;
-	transform-origin: left center;
-	transform: rotate(-45deg);
-}
 
-.entry-company-arrow::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 7px;
-	height: 7px;
-	border-top: 1.5px solid currentColor;
-	border-right: 1.5px solid currentColor;
-}
-
-.entry-company:hover .entry-company-arrow {
+.entry-company:hover .entry-company-icon {
 	transform: translate(2px, -2px);
 }
 
