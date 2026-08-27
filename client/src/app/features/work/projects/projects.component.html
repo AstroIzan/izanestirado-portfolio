@@ -4,7 +4,95 @@
     <h2>Projects</h2>
   </div>
 
-  <p>
-    APIs, dashboards, pipelines, and production tooling.
-  </p>
+  <div class="projects-intro">
+    <p class="projects-kicker">Selected public builds</p>
+    <p>Production-minded systems, interactive experiments, and the code behind them.</p>
+  </div>
+
+  <article class="featured-project">
+    <div class="featured-copy">
+      <div class="featured-heading">
+        <span>01 / Featured build</span>
+        <span class="featured-status">Active development</span>
+      </div>
+
+      <h3>{{ featuredProject.title }}</h3>
+      <p class="featured-type">{{ featuredProject.type }}</p>
+      <p class="featured-summary">{{ featuredProject.summary }}</p>
+
+      <ul class="featured-stack" aria-label="{{ featuredProject.title }} stack">
+        @for (tool of featuredProject.stack; track tool) {
+          <li>{{ tool }}</li>
+        }
+      </ul>
+
+      <div class="project-actions">
+        @for (link of featuredLinks; track link.label) {
+          <a [href]="link.url" target="_blank" rel="noopener noreferrer">
+            <i [class]="link.icon" aria-hidden="true"></i>
+            {{ link.label }}
+          </a>
+        }
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="featured-media"
+      (click)="openPreview(featuredProject.title, featuredProject.previewUrl)"
+      [attr.aria-label]="'Open ' + featuredProject.title + ' preview'"
+    >
+      <img [src]="featuredProject.previewUrl" [alt]="featuredProject.title + ' repository preview'">
+    </button>
+  </article>
+
+  <div class="project-rail-heading">
+    <span>Project archive</span>
+    <span>Repository / live build</span>
+  </div>
+
+  <ol class="project-rail">
+    @for (project of projects; track project.code) {
+      <li class="project-row">
+        <span class="project-code">{{ project.code }}</span>
+        <button
+          type="button"
+          class="project-preview"
+          (click)="openPreview(project.title, project.previewUrl)"
+          [attr.aria-label]="'Open ' + project.title + ' preview'"
+        >
+          <img [src]="project.previewUrl" [alt]="project.title + ' repository preview'" loading="lazy">
+        </button>
+        <div class="project-title">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.type }}</p>
+        </div>
+        <span class="project-stack">{{ project.stack }}</span>
+        <div class="project-links">
+          <a [href]="project.repoUrl" target="_blank" rel="noopener noreferrer" [attr.aria-label]="project.title + ' repository'" title="Repository">
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+          </a>
+          @if (project.liveUrl) {
+            <a [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" [attr.aria-label]="project.title + ' live demo'" title="Live demo">
+              <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+          }
+        </div>
+      </li>
+    }
+  </ol>
 </section>
+
+@if (selectedPreview(); as preview) {
+  <div class="project-lightbox" role="presentation" (click)="closePreview()">
+    <section class="preview-dialog" role="dialog" aria-modal="true" [attr.aria-label]="preview.title + ' preview'" (click)="$event.stopPropagation()">
+      <div class="preview-dialog-head">
+        <span>{{ preview.title }}</span>
+        <button type="button" (click)="closePreview()" aria-label="Close preview">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <img [src]="preview.previewUrl" [alt]="preview.title + ' repository preview'">
+    </section>
+  </div>
+}
