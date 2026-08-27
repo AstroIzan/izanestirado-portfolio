@@ -39,7 +39,7 @@
     <button
       type="button"
       class="featured-media"
-      (click)="openPreview(featuredProject.title, featuredProject.previewUrl)"
+      (click)="openPreview(featuredProject.title, featuredProject.previewUrls)"
       [attr.aria-label]="'Open ' + featuredProject.title + ' preview'"
     >
       <img [src]="featuredProject.previewUrl" [alt]="featuredProject.title + ' repository preview'">
@@ -58,16 +58,26 @@
         <button
           type="button"
           class="project-preview"
-          (click)="openPreview(project.title, project.previewUrl)"
+          (click)="openPreview(project.title, project.previewUrls)"
           [attr.aria-label]="'Open ' + project.title + ' preview'"
         >
           <img [src]="project.previewUrl" [alt]="project.title + ' repository preview'" loading="lazy">
         </button>
         <div class="project-title">
           <h3>{{ project.title }}</h3>
-          <p>{{ project.type }}</p>
+          <p>
+            {{ project.type }}
+            <span class="project-status" [class]="'project-status project-status--' + project.status">
+              {{ project.status }}
+            </span>
+          </p>
         </div>
-        <span class="project-stack">{{ project.stack }}</span>
+        <p class="project-description">{{ project.description }}</p>
+        <ul class="project-stack" [attr.aria-label]="project.title + ' technologies'">
+          @for (technology of project.stack; track technology) {
+            <li>{{ technology }}</li>
+          }
+        </ul>
         <div class="project-links">
           <a [href]="project.repoUrl" target="_blank" rel="noopener noreferrer" [attr.aria-label]="project.title + ' repository'" title="Repository">
             <i class="fa-brands fa-github" aria-hidden="true"></i>
@@ -92,7 +102,23 @@
           <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
       </div>
-      <img [src]="preview.previewUrl" [alt]="preview.title + ' repository preview'">
+      <div class="preview-gallery">
+        <img [src]="preview.previewUrls[selectedPreviewIndex()]" [alt]="preview.title + ' preview ' + (selectedPreviewIndex() + 1)">
+      </div>
+      <div class="preview-thumbnails" role="tablist" [attr.aria-label]="preview.title + ' previews'">
+        @for (previewUrl of preview.previewUrls; track previewUrl; let index = $index) {
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="selectedPreviewIndex() === index"
+            [class.is-selected]="selectedPreviewIndex() === index"
+            [attr.aria-label]="'Show preview ' + (index + 1)"
+            (click)="selectPreview(index)"
+          >
+            <img [src]="previewUrl" alt="">
+          </button>
+        }
+      </div>
     </section>
   </div>
 }
