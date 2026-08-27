@@ -24,15 +24,11 @@
 		<app-work-experience />
 		<app-work-projects />
 		<app-work-skills />
-	} @else {
-		<app-hobbie-personal />
-		<app-hobbie-volunteer />
-		<app-hobbie-hobbies />
+
+		<app-contact id="contact" class="content-section" />
+
+		<app-footer [currentYear]="currentYear" />
 	}
-
-	<app-contact id="contact" class="content-section" />
-
-	<app-footer [currentYear]="currentYear" />
 
 </main>
 

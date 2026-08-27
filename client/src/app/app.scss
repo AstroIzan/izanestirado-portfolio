@@ -10,11 +10,11 @@
   --line: var(--color-home-line-dark);
   --panel-bg: var(--color-home-panel-bg-dark);
   --panel-hover: var(--color-home-panel-hover-dark);
-  --primary: var(--color-work-primary);
-  --secondary: var(--color-work-secondary);
-  --status-accent: var(--color-work-secondary);
-  --hero-top: var(--color-home-hero-work-top);
-  --hero-bottom: var(--color-home-hero-work-bottom);
+  --primary: var(--color-hobbie-primary);
+  --secondary: var(--color-hobbie-secondary);
+  --status-accent: var(--color-hobbie-secondary);
+  --hero-top: var(--color-home-hero-hobbie-top);
+  --hero-bottom: var(--color-home-hero-hobbie-bottom);
   --footer-line: var(--color-home-footer-line-dark);
   --grid-line: var(--color-home-grid-line-dark);
 
@@ -42,19 +42,19 @@
 }
 
 .page[data-site-mode="work"] {
-  --primary: var(--color-work-primary);
-  --secondary: var(--color-work-secondary);
-  --status-accent: var(--color-work-secondary);
-  --hero-top: var(--color-home-hero-work-top);
-  --hero-bottom: var(--color-home-hero-work-bottom);
-}
-
-.page[data-site-mode="hobbie"] {
   --primary: var(--color-hobbie-primary);
   --secondary: var(--color-hobbie-secondary);
   --status-accent: var(--color-hobbie-secondary);
   --hero-top: var(--color-home-hero-hobbie-top);
   --hero-bottom: var(--color-home-hero-hobbie-bottom);
+}
+
+.page[data-site-mode="hobbie"] {
+  --primary: var(--color-work-primary);
+  --secondary: var(--color-work-secondary);
+  --status-accent: var(--color-work-secondary);
+  --hero-top: var(--color-home-hero-work-top);
+  --hero-bottom: var(--color-home-hero-work-bottom);
 }
 
 .content-section {

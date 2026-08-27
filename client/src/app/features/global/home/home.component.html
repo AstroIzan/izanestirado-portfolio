@@ -29,6 +29,7 @@
     <div class="glow glow-two"></div>
   </div>
 
+  @if (siteMode === 'work') {
   <div class="hero-content">
 
     <span class="eyebrow">
@@ -67,7 +68,16 @@
     </div>
 
   </div>
+  } @else {
+    <div class="hobby-coming-soon" role="status">
+      <span class="coming-soon-mark" aria-hidden="true">✦</span>
+      <p>Hobby mode / under construction</p>
+      <h1>Something<br><em>personal</em><br>is loading.</h1>
+      <span class="coming-soon-note">The next section is being made with care.</span>
+    </div>
+  }
 
+  @if (siteMode === 'work') {
   <a
     class="scroll-indicator"
     [attr.href]="siteMode === 'work' ? '#experience' : '#personal'"
@@ -76,5 +86,6 @@
     <span></span>
     Scroll
   </a>
+  }
 
 </section>
