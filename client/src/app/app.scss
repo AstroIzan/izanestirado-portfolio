@@ -50,11 +50,102 @@
 }
 
 .page[data-site-mode="hobbie"] {
-  --primary: var(--color-work-primary);
-  --secondary: var(--color-work-secondary);
-  --status-accent: var(--color-work-secondary);
-  --hero-top: var(--color-home-hero-work-top);
-  --hero-bottom: var(--color-home-hero-work-bottom);
+  --bg: var(--hobbie-bg-dark);
+  --text: var(--hobbie-text-dark);
+  --muted: var(--hobbie-muted-dark);
+  --ink: var(--hobbie-ink-dark);
+  --line: color-mix(in srgb, var(--hobbie-ink-dark) 55%, transparent);
+  --panel-bg: color-mix(in srgb, var(--hobbie-ink-dark) 8%, transparent);
+  --panel-hover: color-mix(in srgb, var(--hobbie-sun) 22%, transparent);
+  --primary: var(--hobbie-coral);
+  --secondary: var(--hobbie-sun);
+  --status-accent: var(--hobbie-mint);
+  --dot: color-mix(in srgb, var(--hobbie-ink-dark) 16%, transparent);
+  --sticker-shadow: 0.55rem 0.55rem 0 var(--ink);
+
+  font-family: var(--font-hobbie);
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 12% 14%, color-mix(in srgb, var(--hobbie-grape) 42%, transparent), transparent 40%),
+    radial-gradient(circle at 88% 10%, color-mix(in srgb, var(--hobbie-coral) 34%, transparent), transparent 38%),
+    radial-gradient(circle at 82% 84%, color-mix(in srgb, var(--hobbie-sky) 32%, transparent), transparent 42%),
+    radial-gradient(circle at 16% 88%, color-mix(in srgb, var(--hobbie-sun) 28%, transparent), transparent 40%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+.page[data-site-mode="hobbie"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(var(--dot) 1.6px, transparent 1.6px);
+  background-size: 26px 26px;
+}
+
+.page.light-mode[data-site-mode="hobbie"] {
+  --bg: var(--hobbie-bg-light);
+  --text: var(--hobbie-text-light);
+  --muted: var(--hobbie-muted-light);
+  --ink: var(--hobbie-ink-light);
+  --line: color-mix(in srgb, var(--hobbie-ink-light) 55%, transparent);
+  --panel-bg: color-mix(in srgb, var(--hobbie-ink-light) 6%, transparent);
+  --panel-hover: color-mix(in srgb, var(--hobbie-sun) 34%, transparent);
+  --dot: color-mix(in srgb, var(--hobbie-ink-light) 18%, transparent);
+}
+
+.page[data-site-mode="hobbie"] .content-section {
+  width: min(100%, 1080px);
+  margin: 3rem auto;
+  padding: 3rem clamp(1.5rem, 4vw, 3rem);
+  border: 3px solid var(--ink);
+  border-top: 3px solid var(--ink);
+  border-radius: 2.75rem;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  box-shadow: var(--sticker-shadow);
+}
+
+.page[data-site-mode="hobbie"] .content-section:nth-of-type(even) {
+  rotate: 0.6deg;
+}
+
+.page[data-site-mode="hobbie"] .content-section:nth-of-type(odd) {
+  rotate: -0.6deg;
+}
+
+.page[data-site-mode="hobbie"] .section-title {
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.page[data-site-mode="hobbie"] .section-title span {
+  display: inline-grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--secondary);
+  color: var(--hobbie-ink-light);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  rotate: -8deg;
+}
+
+.page[data-site-mode="hobbie"] .section-title h2 {
+  font-family: var(--font-hobbie-hand);
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.page[data-site-mode="hobbie"] .content-section p {
+  font-size: 1.05rem;
+  line-height: 1.7;
 }
 
 .content-section {

@@ -1,0 +1,307 @@
+// Hobbie-mode skin. Deliberately playful and unrelated to the work aesthetic:
+// change anything here freely, it will never affect [data-site-mode='work'].
+:host-context([data-site-mode='hobbie']) {
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 9rem 6vw 5rem;
+  }
+
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  // The perspective grid belongs to the work aesthetic only.
+  .grid {
+    display: none;
+  }
+
+  .glow {
+    position: absolute;
+    width: 46vw;
+    height: 46vw;
+    min-width: 320px;
+    min-height: 320px;
+    border-radius: 46% 54% 62% 38% / 55% 42% 58% 45%;
+    filter: blur(60px);
+    opacity: 0.4;
+    animation: hobby-drift 18s ease-in-out infinite;
+  }
+
+  .glow-one {
+    top: -12vw;
+    right: -10vw;
+    background: var(--hobbie-grape);
+  }
+
+  .glow-two {
+    bottom: -14vw;
+    left: -12vw;
+    background: var(--hobbie-sky);
+    animation-delay: -9s;
+  }
+
+  .hobby-hero {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    justify-items: center;
+    width: min(100%, 54rem);
+    text-align: center;
+  }
+
+  .sticker-field {
+    position: absolute;
+    inset: -6rem -4rem;
+    pointer-events: none;
+  }
+
+  .sticker {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 4.2rem;
+    height: 4.2rem;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: 0.35rem 0.35rem 0 var(--ink);
+    font-size: 1.75rem;
+    animation: hobby-bob 6s ease-in-out infinite;
+  }
+
+  .sticker-fire {
+    top: 1rem;
+    left: 0;
+    background: color-mix(in srgb, var(--hobbie-coral) 70%, var(--bg));
+    rotate: -12deg;
+  }
+
+  .sticker-star {
+    top: -1.5rem;
+    right: 3rem;
+    background: color-mix(in srgb, var(--hobbie-grape) 60%, var(--bg));
+    rotate: 10deg;
+    animation-delay: -1.4s;
+  }
+
+  .sticker-peak {
+    bottom: 4rem;
+    left: -1.5rem;
+    background: color-mix(in srgb, var(--hobbie-mint) 60%, var(--bg));
+    rotate: 8deg;
+    animation-delay: -2.8s;
+  }
+
+  .sticker-flag {
+    bottom: 1.5rem;
+    right: -1rem;
+    background: color-mix(in srgb, var(--hobbie-sky) 60%, var(--bg));
+    rotate: -9deg;
+    animation-delay: -4.2s;
+  }
+
+  .sticker-spark {
+    top: 42%;
+    right: -3.5rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    background: color-mix(in srgb, var(--hobbie-sun) 75%, var(--bg));
+    font-size: 1.3rem;
+    rotate: 14deg;
+    animation-delay: -5.5s;
+  }
+
+  .hobby-hello {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0 0 1.25rem;
+    padding: 0.5rem 1.15rem;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    background: var(--secondary);
+    color: var(--hobbie-ink-light);
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0.35rem 0.35rem 0 var(--ink);
+    rotate: -2deg;
+  }
+
+  .hobby-wave {
+    display: inline-block;
+    transform-origin: 70% 80%;
+    animation: hobby-wave 2.6s ease-in-out infinite;
+  }
+
+  .hobby-title {
+    margin: 0;
+    font-family: var(--font-hobbie-hand);
+    font-size: clamp(4rem, 13vw, 9rem);
+    font-weight: 700;
+    line-height: 0.86;
+    letter-spacing: 0;
+  }
+
+  .hobby-title-line {
+    display: block;
+  }
+
+  .hobby-title em {
+    font-style: normal;
+    color: var(--primary);
+    text-shadow: 0.28rem 0.28rem 0 var(--ink);
+  }
+
+  .hobby-title-sub {
+    color: var(--muted);
+    font-size: 0.46em;
+    rotate: -2deg;
+  }
+
+  .hobby-blurb {
+    max-width: 34ch;
+    margin: 1.75rem 0 0;
+    color: var(--text);
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .hobby-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.65rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hobby-tag {
+    padding: 0.45rem 1rem;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    color: var(--hobbie-ink-light);
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0.25rem 0.25rem 0 var(--ink);
+    transition: transform 0.18s ease;
+  }
+
+  .hobby-tag:hover {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+
+  .hobby-tag-fire { background: var(--hobbie-coral); rotate: -3deg; }
+  .hobby-tag-sky { background: var(--hobbie-sky); rotate: 2deg; }
+  .hobby-tag-peak { background: var(--hobbie-mint); rotate: -2deg; }
+  .hobby-tag-motor { background: var(--hobbie-bubble); rotate: 3deg; }
+
+  .hobby-note {
+    position: relative;
+    margin-top: 2.75rem;
+    padding: 1.1rem 1.75rem;
+    border: 3px dashed var(--ink);
+    border-radius: 1.5rem;
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    rotate: 1deg;
+  }
+
+  .hobby-note p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .hobby-tape {
+    position: absolute;
+    top: -0.85rem;
+    left: 50%;
+    width: 6.5rem;
+    height: 1.7rem;
+    translate: -50% 0;
+    rotate: -4deg;
+    background: color-mix(in srgb, var(--hobbie-sun) 70%, transparent);
+    border: 2px solid color-mix(in srgb, var(--ink) 45%, transparent);
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  @keyframes hobby-bob {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -12px; }
+  }
+
+  @keyframes hobby-wave {
+    0%, 60%, 100% { rotate: 0deg; }
+    15% { rotate: 18deg; }
+    30% { rotate: -12deg; }
+    45% { rotate: 14deg; }
+  }
+
+  @keyframes hobby-drift {
+    0%, 100% { translate: 0 0; scale: 1; }
+    50% { translate: 3vw -2vw; scale: 1.08; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sticker,
+    .glow,
+    .hobby-wave {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      min-height: 100svh;
+      padding: 8.5rem 1.5rem 4rem;
+    }
+
+    .sticker-field {
+      inset: -3rem -0.5rem;
+    }
+
+    .sticker {
+      width: 3.2rem;
+      height: 3.2rem;
+      font-size: 1.35rem;
+    }
+
+    .sticker-spark {
+      display: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .sticker-field {
+      display: none;
+    }
+
+    .hobby-title {
+      font-size: 3.9rem;
+    }
+
+    .hobby-blurb {
+      max-width: 28ch;
+      font-size: 1.05rem;
+    }
+
+    .hobby-tag {
+      font-size: 0.85rem;
+    }
+  }
+
+}

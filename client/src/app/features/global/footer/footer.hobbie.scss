@@ -1,7 +1,121 @@
-// Hobbie-mode skin. Independent from the work aesthetic on purpose:
+// Hobbie-mode skin. Deliberately playful and unrelated to the work aesthetic:
 // change anything here freely, it will never affect [data-site-mode='work'].
 :host-context([data-site-mode='hobbie']) {
+
   .site-footer {
     position: relative;
+    width: min(100%, 1080px);
+    margin: 3rem auto 2.5rem;
+    padding: clamp(2rem, 5vw, 3rem);
+    border: 3px solid var(--ink);
+    border-radius: 2.75rem;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    box-shadow: 0.55rem 0.55rem 0 var(--hobbie-bubble);
+    color: var(--text);
+    font-family: var(--font-hobbie);
+    rotate: -0.5deg;
   }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .footer-kicker {
+    display: inline-block;
+    padding: 0.3rem 0.85rem;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    background: var(--hobbie-sun);
+    color: var(--hobbie-ink-light);
+    font-size: 0.85rem;
+    font-weight: 600;
+    rotate: -3deg;
+  }
+
+  .footer-identity p {
+    margin: 0.75rem 0 0;
+    font-family: var(--font-hobbie-hand);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .footer-content {
+    display: grid;
+    justify-items: end;
+    gap: 1rem;
+  }
+
+  .footer-message {
+    margin: 0;
+    max-width: 26ch;
+    text-align: right;
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .footer-links a {
+    display: inline-grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    color: var(--text);
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: translate 0.15s ease, rotate 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+
+  .footer-links a:nth-child(1):hover { background: var(--hobbie-coral); }
+  .footer-links a:nth-child(2):hover { background: var(--hobbie-bubble); }
+  .footer-links a:nth-child(3):hover { background: var(--hobbie-sky); }
+  .footer-links a:nth-child(4):hover { background: var(--hobbie-mint); }
+
+  .footer-links a:hover,
+  .footer-links a:focus-visible {
+    color: var(--hobbie-ink-light);
+    translate: 0 -3px;
+    rotate: -6deg;
+  }
+
+  .footer-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 3px dashed color-mix(in srgb, var(--ink) 45%, transparent);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 700px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+      justify-items: start;
+    }
+
+    .footer-message {
+      text-align: left;
+    }
+
+    .footer-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
 }

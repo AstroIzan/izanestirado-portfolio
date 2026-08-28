@@ -1,7 +1,151 @@
-// Hobbie-mode skin. Independent from the work aesthetic on purpose:
+// Hobbie-mode skin. Deliberately playful and unrelated to the work aesthetic:
 // change anything here freely, it will never affect [data-site-mode='work'].
 :host-context([data-site-mode='hobbie']) {
+
   & {
     display: block;
+    position: relative;
+    width: min(100%, 1080px);
+    margin-inline: auto;
+    font-family: var(--font-hobbie);
   }
+
+  .contact-intro {
+    max-width: 40ch;
+    margin: 0 0 2rem;
+    color: var(--text);
+    font-size: 1.15rem;
+  }
+
+  .contact-form {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 3px solid var(--ink);
+    border-radius: 2rem;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    box-shadow: 0.55rem 0.55rem 0 var(--hobbie-sky);
+  }
+
+  .contact-methods {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .contact-methods button {
+    padding: 0.6rem 1.2rem;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, rotate 0.18s ease;
+  }
+
+  .contact-methods button.active {
+    background: var(--hobbie-sun);
+    color: var(--hobbie-ink-light);
+    rotate: -2deg;
+    box-shadow: 0.25rem 0.25rem 0 var(--ink);
+  }
+
+  .field {
+    display: grid;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  label {
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    padding: 0.75rem 1rem;
+    border: 3px solid var(--ink);
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--bg) 60%, transparent);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: 0;
+    border-color: var(--hobbie-coral);
+    box-shadow: 0.25rem 0.25rem 0 var(--hobbie-coral);
+  }
+
+  textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  small {
+    color: var(--color-contact-error);
+    font-size: 0.85rem;
+  }
+
+  .success,
+  .error {
+    margin-bottom: 1.25rem;
+    padding: 0.85rem 1.15rem;
+    border: 3px solid var(--ink);
+    border-radius: 1rem;
+    color: var(--hobbie-ink-light);
+    font-weight: 600;
+  }
+
+  .success {
+    background: var(--hobbie-mint);
+  }
+
+  .error {
+    background: var(--hobbie-coral);
+  }
+
+  form > button {
+    padding: 0.85rem 1.75rem;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    background: var(--hobbie-bubble);
+    color: var(--hobbie-ink-light);
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0.35rem 0.35rem 0 var(--ink);
+    transition: translate 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  form > button:hover:not(:disabled) {
+    translate: -2px -2px;
+    box-shadow: 0.5rem 0.5rem 0 var(--ink);
+  }
+
+  form > button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  // Honeypot must stay invisible to real users.
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  @media (max-width: 700px) {
+    .contact-methods {
+      flex-direction: column;
+    }
+  }
+
 }

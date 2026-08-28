@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap");
 
 :root {
   /* Core neutrals */
@@ -21,6 +22,22 @@
   --color-work-secondary: #6bd2ff;
   --color-hobbie-primary: #6bd2ff;
   --color-hobbie-secondary: #ffcf3f;
+
+  /* Hobbie mode playful palette */
+  --hobbie-coral: #ff7a5c;
+  --hobbie-sun: #ffd23f;
+  --hobbie-sky: #4cc9f0;
+  --hobbie-grape: #a06bff;
+  --hobbie-mint: #4ade80;
+  --hobbie-bubble: #ff8fc7;
+  --hobbie-bg-dark: #14101f;
+  --hobbie-text-dark: #fdf6ec;
+  --hobbie-muted-dark: #beb0d4;
+  --hobbie-ink-dark: #fdf6ec;
+  --hobbie-bg-light: #fff4e2;
+  --hobbie-text-light: #241a38;
+  --hobbie-muted-light: #6d5c85;
+  --hobbie-ink-light: #241a38;
 
   /* Contact palette */
   --color-contact-button-text: #a8abb7;
@@ -76,6 +93,8 @@
 
   /* Typography */
   --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", "Fira Code", Consolas, monospace;
+  --font-hobbie: "Fredoka", "Comic Sans MS", "Segoe UI", sans-serif;
+  --font-hobbie-hand: "Caveat", "Comic Sans MS", cursive;
 }
 
 * {
