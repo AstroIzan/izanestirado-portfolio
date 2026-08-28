@@ -1,0 +1,7 @@
+// Hobbie-mode skin. Independent from the work aesthetic on purpose:
+// change anything here freely, it will never affect [data-site-mode='work'].
+:host-context([data-site-mode='hobbie']) {
+  & {
+    display: block;
+  }
+}

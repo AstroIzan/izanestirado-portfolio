@@ -1,3 +1,6 @@
+// Work-mode skin. Everything here only applies inside [data-site-mode='work'].
+:host-context([data-site-mode='work']) {
+
 .site-footer {
   position: relative;
   overflow: hidden;
@@ -192,4 +195,6 @@
   .footer-stack {
     width: fit-content;
   }
+}
+
 }

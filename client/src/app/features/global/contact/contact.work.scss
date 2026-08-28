@@ -1,4 +1,7 @@
-:host {
+// Work-mode skin. Everything here only applies inside [data-site-mode='work'].
+:host-context([data-site-mode='work']) {
+
+& {
   display: block;
   position: relative;
   width: min(100%, 960px);
@@ -7,7 +10,7 @@
   border-top: 0;
 }
 
-:host::before {
+&::before {
   content: '';
   position: absolute;
   top: 0;
@@ -270,4 +273,6 @@ form > button:disabled {
   form > button {
     min-height: 52px;
   }
+}
+
 }

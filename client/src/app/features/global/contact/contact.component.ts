@@ -15,7 +15,7 @@ import {
   selector: 'app-contact',
   imports: [ReactiveFormsModule],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss'
+  styleUrls: ['./contact.work.scss', './contact.hobbie.scss']
 })
 export class ContactComponent {
   private readonly fb = inject(FormBuilder);

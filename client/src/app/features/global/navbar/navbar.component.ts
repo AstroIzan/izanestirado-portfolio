@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrls: ['./navbar.work.scss', './navbar.hobbie.scss']
 })
 export class NavbarComponent {
   @Input() isDarkMode = true;

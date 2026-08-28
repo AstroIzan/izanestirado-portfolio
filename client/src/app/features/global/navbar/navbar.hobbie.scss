@@ -1,0 +1,260 @@
+// Hobbie-mode skin. Independent from the work aesthetic on purpose:
+// change anything here freely, it will never affect [data-site-mode='work'].
+:host-context([data-site-mode='hobbie']) {
+
+  .top-menu {
+    position: absolute;
+    z-index: 30;
+    top: 1.5rem;
+    width: 100%;
+    padding-inline: 5%;
+    display: grid;
+    grid-template-columns: 250px minmax(500px, 640px) 250px;
+    column-gap: clamp(1rem, 2.8vw, 3rem);
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .menu-panel {
+    min-height: 58px;
+    border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--panel-bg) 92%, transparent);
+    color: var(--text);
+  }
+
+  .panel-theme,
+  .panel-mode button,
+  .menu-toggle {
+    cursor: pointer;
+  }
+
+  .panel-theme {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    width: 100%;
+    justify-self: start;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  .panel-theme:hover {
+    background: var(--panel-hover);
+    transform: translateY(-1px);
+  }
+
+  .panel-icon {
+    font-size: 1.05rem;
+  }
+
+  .panel-nav {
+    grid-column: 2;
+    position: fixed;
+    z-index: 35;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(640px, calc(100vw - 34rem));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.45rem, 1.4vw, 1.2rem);
+    padding: 0 0.8rem;
+    backdrop-filter: blur(7px) saturate(1.05);
+    box-shadow: var(--shadow-nav-elevated);
+  }
+
+  .panel-nav a {
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    color: var(--text);
+    font-size: 0.82rem;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .panel-nav a:hover {
+    background: color-mix(in srgb, var(--secondary) 18%, transparent);
+    color: var(--secondary);
+  }
+
+  .panel-mode {
+    grid-column: 3;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    width: 100%;
+    justify-self: end;
+  }
+
+  .panel-mode::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--secondary) 24%, transparent);
+    transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+
+  .panel-mode.is-hobbie::before {
+    transform: translateX(100%);
+  }
+
+  .panel-mode button {
+    position: relative;
+    z-index: 1;
+    border: 0;
+    background: transparent;
+    min-height: 58px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    transition: color 0.25s ease;
+  }
+
+  .panel-mode button.active {
+    color: var(--text);
+  }
+
+  .panel-mode button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  @media (max-width: 1100px) {
+    .top-menu {
+      position: fixed;
+      grid-template-columns: 50px minmax(156px, 1fr) 50px;
+      grid-template-rows: 50px auto;
+      gap: 0.5rem;
+      top: 0.75rem;
+      width: calc(100vw - 4rem);
+      left: 50%;
+      transform: translateX(-50%);
+      padding-inline: 0;
+    }
+
+    .menu-panel {
+      min-height: 50px;
+    }
+
+    .panel-theme,
+    .panel-mode,
+    .menu-toggle {
+      backdrop-filter: blur(7px) saturate(1.05);
+    }
+
+    .panel-nav {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      position: static;
+      width: 100%;
+      display: grid;
+      gap: 0;
+      max-height: 0;
+      min-height: 0;
+      padding: 0;
+      overflow: hidden;
+      border-color: transparent;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-0.5rem);
+      transition:
+        max-height 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        padding 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.2s ease,
+        transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0.32s;
+    }
+
+    .panel-theme {
+      grid-column: 1;
+      grid-row: 1;
+      width: 50px;
+      padding: 0;
+      justify-self: start;
+    }
+
+    .panel-theme > span:last-child {
+      display: none;
+    }
+
+    .panel-mode {
+      grid-column: 2;
+      grid-row: 1;
+      width: 156px;
+      justify-self: center;
+    }
+
+    .panel-mode button {
+      min-height: 50px;
+      font-size: 0.72rem;
+    }
+
+    .menu-toggle {
+      display: grid;
+      grid-column: 3;
+      grid-row: 1;
+      width: 50px;
+      height: 50px;
+      place-content: center;
+      gap: 5px;
+      border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--panel-bg) 92%, transparent);
+      color: var(--text);
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: currentColor;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .top-menu.is-menu-open .menu-toggle span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .top-menu.is-menu-open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .top-menu.is-menu-open .menu-toggle span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .top-menu.is-menu-open .panel-nav {
+      max-height: 320px;
+      padding: 0.4rem;
+      border-color: color-mix(in srgb, var(--line) 60%, transparent);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+      transition-delay: 0s;
+    }
+
+    .panel-nav a {
+      display: flex;
+      align-items: center;
+      min-height: 46px;
+      border-radius: 0;
+    }
+  }
+
+}

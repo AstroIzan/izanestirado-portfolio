@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrls: ['./footer.work.scss', './footer.hobbie.scss']
 })
 export class FooterComponent {
   @Input() currentYear = new Date().getFullYear();
