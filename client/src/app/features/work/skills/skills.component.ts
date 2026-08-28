@@ -7,7 +7,7 @@ interface SkillDomain {
   summary: string;
   focus: string;
   stack: string[];
-  tone: 'backend' | 'frontend' | 'data' | 'reliability';
+  tone: 'backend' | 'frontend' | 'data' | 'monitoring' | 'reliability';
 }
 
 @Component({
@@ -21,36 +21,45 @@ export class SkillsComponent {
       code: '01',
       icon: 'fa-solid fa-server',
       title: 'Backend systems',
-      summary: 'Services designed around clear contracts, business rules, and dependable integrations.',
-      focus: 'APIs & services',
-      stack: ['C#', '.NET', 'ASP.NET Core', 'REST'],
+      summary: 'Comfortable owning a service end to end: business logic, internal APIs and integrations between systems that already exist and cannot break.',
+      focus: 'Services & APIs',
+      stack: ['C#', '.NET', 'ASP.NET MVC', 'Node.js', 'REST APIs'],
       tone: 'backend'
     },
     {
       code: '02',
       icon: 'fa-solid fa-window-maximize',
       title: 'Frontend delivery',
-      summary: 'Interfaces that turn operational complexity into useful, maintainable workflows.',
-      focus: 'Product UI',
-      stack: ['Angular', 'TypeScript', 'RxJS', 'SCSS'],
+      summary: 'Used to building the screens people actually work on all day: dense tables, request flows, real states and responsive layouts that hold up.',
+      focus: 'Interfaces that get used',
+      stack: ['Angular', 'TypeScript', 'RxJS', 'SCSS', 'Responsive UI'],
       tone: 'frontend'
     },
     {
       code: '03',
       icon: 'fa-solid fa-database',
       title: 'Data & integration',
-      summary: 'Relational data models, reporting paths, and migrations that keep systems connected.',
-      focus: 'Data flows',
-      stack: ['SQL', 'EF Core', 'Migrations', 'Reporting'],
+      summary: 'At ease reading someone else\'s schema, writing the query that explains a problem, and moving data between systems or into reports without losing it.',
+      focus: 'Queries & migrations',
+      stack: ['SQL', 'PostgreSQL', 'Prisma', 'Data migrations', 'Reporting'],
       tone: 'data'
     },
     {
       code: '04',
+      icon: 'fa-solid fa-chart-line',
+      title: 'Monitoring & observability',
+      summary: 'Daily work with monitoring tooling to watch, diagnose and stabilise the applications I look after: dashboards, log digging and alerts that catch things before users do.',
+      focus: 'Dashboards & alerting',
+      stack: ['Grafana', 'Elastic', 'Kibana', 'CheckMK', 'Log analysis'],
+      tone: 'monitoring'
+    },
+    {
+      code: '05',
       icon: 'fa-solid fa-tower-broadcast',
       title: 'Reliability',
-      summary: 'Delivery pipelines and production practices built for visibility, recovery, and continuity.',
-      focus: 'Operations',
-      stack: ['Docker', 'CI/CD', 'Monitoring', 'On-call'],
+      summary: 'Used to production being my responsibility: on-call rotations, incident triage under pressure and calm, traceable fixes instead of guesswork.',
+      focus: 'Production ownership',
+      stack: ['On-call', 'Incident triage', 'Docker', 'Nginx', 'Root cause analysis'],
       tone: 'reliability'
     }
   ];
