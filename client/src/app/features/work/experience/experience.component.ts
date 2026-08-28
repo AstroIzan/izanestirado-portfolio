@@ -27,14 +27,14 @@ export class ExperienceComponent {
     {
       id: 'vueling-operations', branch: 'vueling', lane: 'branch',
       role: 'Developer · AM Operations', company: 'Vueling Airlines', companyUrl: 'https://www.vueling.com',
-      period: '2025 — Now', summary: 'The systems that keep the airline flight operation running.',
+      period: '2025 — Now', summary: 'Building and supporting the flight operations apps, on call 24/7 when the operation cannot wait.',
       bullets: ['Development, maintenance and evolution of the flight operations applications.', '24/7 on-call rotation to keep the operation under control.', 'Complex migrations, work alongside product and IOP reviews.'],
       tags: ['C#', '.NET', 'Angular', 'SQL', 'On-call']
     },
     {
       id: 'vueling-corporate', branch: 'vueling', lane: 'branch',
       role: 'Developer · AM Corporate', company: 'Vueling Airlines', companyUrl: 'https://www.vueling.com',
-      period: '2024', summary: 'Applications built around the employee experience.',
+      period: '2024', summary: 'Maintaining the corporate apps where employees handle their requests, needs and benefits.',
       bullets: ['Development, support and maintenance of the corporate employee apps.', 'Flows for employee requests, needs and benefits.'],
       tags: ['C#', '.NET', 'Angular', 'SQL']
     },
@@ -42,7 +42,7 @@ export class ExperienceComponent {
     {
       id: 'compettia', branch: 'compettia', lane: 'branch', split: true,
       role: 'Software Developer Trainee', company: 'Compettia', companyUrl: 'https://www.compettia.com',
-      period: '2022 — 2023', summary: 'First professional branch written entirely in code.',
+      period: '2022 — 2023', summary: 'First professional branch: .NET MVC features, Excel reporting and the Xamarin to MAUI migration.',
       bullets: ['Development in C# with .NET and ASP.NET MVC, plus HTML front-end work.', 'Business data exports to Excel for corporate reporting.', 'Xamarin and MAUI migration of the mobile apps, plus environment maintenance.'],
       tags: ['C#', '.NET', 'ASP.NET MVC', 'Xamarin']
     },
@@ -50,7 +50,7 @@ export class ExperienceComponent {
     {
       id: 'polinya', branch: 'polinya', lane: 'branch', split: true,
       role: 'Computer Technician', company: 'INS Polinyà', companyUrl: 'https://agora.xtec.cat/iespolinya/',
-      period: '2020 — 2021', summary: 'Keeping the IT system of an entire high school alive and growing.',
+      period: '2020 — 2021', summary: 'Running the high school IT setup end to end: hardware, network, deployments and daily support.',
       bullets: ['Maintenance and improvement of the whole IT system of the institute.', 'Deployment of new equipment and upgrades over the existing setup.', 'Day-to-day support for classroom and staff devices.'],
       tags: ['Hardware', 'Networking', 'Support']
     },
