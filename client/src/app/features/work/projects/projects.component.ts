@@ -35,10 +35,14 @@ export class ProjectsComponent {
     stack: ['Angular', 'Express', 'Prisma', 'PostgreSQL'],
     repoUrl: 'https://github.com/AstroIzan/ADF247',
     liveUrl: 'https://astroizan.github.io/ADF247/',
-    previewUrl: 'https://opengraph.githubassets.com/1/AstroIzan/ADF247',
+    previewUrl: '/projects/adf247/login.png',
     previewUrls: [
-      'https://opengraph.githubassets.com/1/AstroIzan/ADF247',
-      'https://opengraph.githubassets.com/2/AstroIzan/ADF247'
+      '/projects/adf247/home.png',
+      '/projects/adf247/login.png',
+      '/projects/adf247/panel.png',
+      '/projects/adf247/tableview.png',
+      '/projects/adf247/tableview2.png',
+      '/projects/adf247/mobileview.png'
     ]
   };
 
