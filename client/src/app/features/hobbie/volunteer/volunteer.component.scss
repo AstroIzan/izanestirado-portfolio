@@ -147,3 +147,41 @@
 		margin-left: 0.4rem;
 	}
 }
+
+:host-context([data-site-mode='hobbie']) {
+	.volunteer-board {
+		border: 2px solid var(--ink);
+		border-radius: 1.8rem;
+		background: color-mix(in srgb, var(--hobbie-sun) 16%, var(--panel-bg));
+		box-shadow: 0.5rem 0.55rem 0 color-mix(in srgb, var(--hobbie-ink-dark) 22%, transparent);
+		color: var(--text);
+		rotate: 1.1deg;
+	}
+
+	.board-route {
+		border-color: var(--primary);
+	}
+
+	.board-route span,
+	.board-route i,
+	.board-route b {
+		width: 0.65rem;
+		height: 0.65rem;
+		border: 1px solid var(--primary);
+		border-radius: 0;
+		background: var(--bg);
+	}
+
+	.board-route span { top: -0.45rem; }
+	.board-route i { top: 2.6rem; background: var(--primary); }
+	.board-route b { bottom: -0.45rem; background: var(--primary); }
+
+	.volunteer-board dl div {
+		border-top: 1px solid var(--line);
+	}
+
+	.volunteer-board dd,
+	.board-footer {
+		font-weight: 400;
+	}
+}

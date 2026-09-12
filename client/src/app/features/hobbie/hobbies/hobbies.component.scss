@@ -132,3 +132,51 @@
 		padding: 1rem 0.8rem;
 	}
 }
+
+:host-context([data-site-mode='hobbie']) {
+	.hobby-list {
+		gap: 0.85rem;
+		border: 0;
+	}
+
+	.hobby-item {
+		min-height: 10.5rem;
+		border: 2px solid var(--ink);
+		border-radius: 1.6rem;
+		box-shadow: 0.4rem 0.45rem 0 color-mix(in srgb, var(--hobbie-ink-dark) 20%, transparent);
+		color: var(--text);
+		background: color-mix(in srgb, var(--hobbie-sky) 14%, var(--panel-bg));
+		transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.hobby-item:hover {
+		filter: none;
+		transform: translateY(-3px);
+		box-shadow: 0.55rem 0.6rem 0 color-mix(in srgb, var(--hobbie-ink-dark) 24%, transparent);
+		background: color-mix(in srgb, var(--hobbie-coral) 17%, var(--panel-bg));
+	}
+
+	.hobby-item--fire,
+	.hobby-item--sky,
+	.hobby-item--mountain,
+	.hobby-item--motor {
+		background: color-mix(in srgb, var(--hobbie-sky) 14%, var(--panel-bg));
+	}
+
+	.hobby-number,
+	.hobby-emoji,
+	.hobby-arrow {
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		letter-spacing: 0.08em;
+	}
+
+	.hobby-emoji {
+		padding-top: 0.15rem;
+	}
+
+	.hobby-item h3 {
+		font-weight: 400;
+	}
+}

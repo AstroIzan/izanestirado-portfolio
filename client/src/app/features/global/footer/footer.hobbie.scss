@@ -118,4 +118,64 @@
     }
   }
 
+  .site-footer {
+    margin: 5rem auto 2rem;
+    padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 4rem);
+    border: 1px solid var(--line);
+    border-radius: 2.25rem;
+    background: color-mix(in srgb, var(--panel-bg) 70%, transparent);
+    box-shadow: 0.55rem 0.65rem 0 color-mix(in srgb, var(--hobbie-ink-dark) 24%, transparent);
+    rotate: -0.7deg;
+  }
+
+  .footer-kicker {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--primary);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    rotate: 0deg;
+  }
+
+  .footer-identity p {
+    font-family: var(--font-hobbie-hand);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 400;
+  }
+
+  .footer-message {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .footer-links a {
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    font-size: 0.85rem;
+  }
+
+  .footer-links a:nth-child(n):hover,
+  .footer-links a:nth-child(n):focus-visible {
+    background: color-mix(in srgb, var(--primary) 12%, transparent);
+    color: var(--primary);
+    translate: 0 -2px;
+    rotate: 0deg;
+  }
+
+  .footer-meta {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 }

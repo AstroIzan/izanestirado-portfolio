@@ -162,3 +162,40 @@
 		transition: none;
 	}
 }
+
+:host-context([data-site-mode='hobbie']) {
+	.personal-card {
+		min-height: 13rem;
+		border: 2px solid var(--ink);
+		border-radius: 1.8rem;
+		box-shadow: 0.45rem 0.5rem 0 color-mix(in srgb, var(--hobbie-ink-dark) 22%, transparent);
+		color: var(--text);
+		rotate: -1.1deg;
+		background: color-mix(in srgb, var(--hobbie-mint) 18%, var(--panel-bg));
+	}
+
+	.personal-card:hover {
+		transform: translateY(-4px) rotate(0.6deg);
+		background: color-mix(in srgb, var(--hobbie-sky) 16%, var(--panel-bg));
+	}
+
+	.personal-card--wide,
+	.personal-card--sun,
+	.personal-card--pink {
+		background: color-mix(in srgb, var(--hobbie-mint) 18%, var(--panel-bg));
+		rotate: -1.1deg;
+	}
+
+	.personal-card h3 {
+		font-weight: 400;
+	}
+
+	.card-icon {
+		right: 1.3rem;
+		bottom: 1rem;
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		letter-spacing: 0.1em;
+	}
+}

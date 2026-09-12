@@ -1,5 +1,6 @@
 <section id="home" class="hero">
 
+  @if (siteMode === 'work') {
   <div class="hero-background">
     <div class="grid" aria-hidden="true">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -28,6 +29,7 @@
     <div class="glow glow-one"></div>
     <div class="glow glow-two"></div>
   </div>
+  }
 
   @if (siteMode === 'work') {
   <div class="hero-content">
@@ -71,38 +73,23 @@
   } @else {
     <div class="hobby-hero">
 
-      <div class="sticker-field" aria-hidden="true">
-        <span class="sticker sticker-fire">🔥</span>
-        <span class="sticker sticker-star">🔭</span>
-        <span class="sticker sticker-peak">⛰️</span>
-        <span class="sticker sticker-flag">🏁</span>
-        <span class="sticker sticker-spark">✨</span>
-      </div>
-
-      <p class="hobby-hello">
-        hey, you found the fun side
-        <span class="hobby-wave" aria-hidden="true">👋</span>
-      </p>
+      <p class="hobby-hello">PERSONAL / FIELD NOTES</p>
 
       <h1 class="hobby-title">
-        <span class="hobby-title-line">I'm <em>Izan</em></span>
-        <span class="hobby-title-line hobby-title-sub">off the clock</span>
+        <span class="hobby-title-line">Izan <em>after</em></span>
+        <span class="hobby-title-line hobby-title-sub">the workday</span>
       </h1>
 
-      <p class="hobby-blurb">
-        Wildfire volunteer, night sky chaser, mountain walker and hopelessly into engines.
-      </p>
-
       <ul class="hobby-tags">
-        <li class="hobby-tag hobby-tag-fire">🔥 Firefighter</li>
-        <li class="hobby-tag hobby-tag-sky">🔭 Astrophotography</li>
-        <li class="hobby-tag hobby-tag-peak">⛰️ Mountain</li>
-        <li class="hobby-tag hobby-tag-motor">🏁 Motorsport</li>
+        <li class="hobby-tag hobby-tag-fire">Fire response</li>
+        <li class="hobby-tag hobby-tag-sky">Night sky</li>
+        <li class="hobby-tag hobby-tag-peak">Mountain routes</li>
+        <li class="hobby-tag hobby-tag-motor">Motorsport</li>
       </ul>
 
-      <div class="hobby-note" role="status">
-        <span class="hobby-tape" aria-hidden="true"></span>
-        <p>this playground is still under construction — come back soon!</p>
+      <div class="hobby-note" role="note">
+        <span class="hobby-note-label">01 / 04</span>
+        <p>Personal interests, documented with the same attention I bring to a good system.</p>
       </div>
 
     </div>
