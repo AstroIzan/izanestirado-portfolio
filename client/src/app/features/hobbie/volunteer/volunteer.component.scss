@@ -37,3 +37,113 @@
 		padding: 4.75rem 1.5rem;
 	}
 }
+
+.volunteer-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+	gap: clamp(2rem, 7vw, 7rem);
+	align-items: center;
+	margin-top: 2.75rem;
+}
+
+.volunteer-copy h3 {
+	max-width: 8ch;
+	margin: 0 0 1.4rem;
+	font-family: var(--font-hobbie-hand);
+	font-size: clamp(3rem, 7vw, 5.8rem);
+	line-height: 0.82;
+}
+
+.volunteer-copy > p:not(.section-kicker) {
+	max-width: 47ch;
+	margin: 0 0 1rem;
+	color: var(--muted);
+	font-size: 1rem;
+	line-height: 1.65;
+}
+
+.volunteer-board {
+	padding: 1.4rem;
+	border: 3px solid var(--ink);
+	background: var(--hobbie-sun);
+	box-shadow: 0.55rem 0.55rem 0 var(--ink);
+	color: var(--hobbie-ink-light);
+	rotate: 2deg;
+}
+
+.board-header {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	font-family: var(--font-mono);
+	font-size: 0.62rem;
+	font-weight: 700;
+}
+
+.board-route {
+	position: relative;
+	height: 6rem;
+	margin: 1.4rem 0 0.5rem;
+	border-top: 3px solid var(--hobbie-ink-light);
+	border-right: 3px solid var(--hobbie-ink-light);
+	border-radius: 0 4rem 0 0;
+}
+
+.board-route span,
+.board-route i,
+.board-route b {
+	position: absolute;
+	display: block;
+	width: 0.9rem;
+	height: 0.9rem;
+	border: 2px solid var(--hobbie-ink-light);
+	border-radius: 50%;
+	background: var(--hobbie-coral);
+}
+
+.board-route span { top: -0.6rem; left: -0.1rem; }
+.board-route i { top: 2.5rem; right: 38%; background: var(--hobbie-sky); }
+.board-route b { right: -0.6rem; bottom: -0.6rem; background: var(--hobbie-mint); }
+
+.volunteer-board dl {
+	margin: 0;
+}
+
+.volunteer-board dl div {
+	display: flex;
+	gap: 1rem;
+	padding: 0.65rem 0;
+	border-top: 2px solid color-mix(in srgb, var(--hobbie-ink-light) 35%, transparent);
+}
+
+.volunteer-board dt {
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+}
+
+.volunteer-board dd {
+	margin: 0;
+	font-family: var(--font-hobbie-hand);
+	font-size: 1.8rem;
+	font-weight: 700;
+	line-height: 0.8;
+}
+
+.board-footer {
+	margin: 1.4rem 0 0;
+	font-family: var(--font-hobbie-hand);
+	font-size: 1.5rem;
+	font-weight: 700;
+	text-align: right;
+}
+
+@media (max-width: 720px) {
+	.volunteer-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.volunteer-board {
+		max-width: 30rem;
+		margin-left: 0.4rem;
+	}
+}

@@ -27,9 +27,13 @@
 
 		<app-contact id="contact" class="content-section" />
 
-		<app-footer [currentYear]="currentYear" />
+		<app-footer [currentYear]="currentYear" [siteMode]="siteMode()" />
 	} @else {
+		<app-hobbie-personal />
+		<app-hobbie-hobbies />
+		<app-hobbie-volunteer />
 		<app-contact id="contact" class="content-section" />
+		<app-footer [currentYear]="currentYear" [siteMode]="siteMode()" />
 	}
 
 </main>

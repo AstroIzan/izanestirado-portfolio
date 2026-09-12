@@ -7,6 +7,9 @@ import { FooterComponent } from './features/global/footer/footer.component';
 import { ExperienceComponent } from './features/work/experience/experience.component';
 import { ProjectsComponent } from './features/work/projects/projects.component';
 import { SkillsComponent } from './features/work/skills/skills.component';
+import { PersonalComponent } from './features/hobbie/personal/personal.component';
+import { HobbiesComponent } from './features/hobbie/hobbies/hobbies.component';
+import { VolunteerComponent } from './features/hobbie/volunteer/volunteer.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +22,9 @@ import { SkillsComponent } from './features/work/skills/skills.component';
     ExperienceComponent,
     ProjectsComponent,
     SkillsComponent,
+    PersonalComponent,
+    HobbiesComponent,
+    VolunteerComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

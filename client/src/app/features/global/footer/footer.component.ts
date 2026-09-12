@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class FooterComponent {
   @Input() currentYear = new Date().getFullYear();
+  @Input() siteMode: 'work' | 'hobbie' = 'work';
 }
