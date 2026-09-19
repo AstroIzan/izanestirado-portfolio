@@ -67,8 +67,47 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare build directory
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf "${DEPLOY_PATH}"
+          mkdir -p "${DEPLOY_PATH}"
+
+      - name: Copy application
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rsync -a \
+            --delete \
+            --exclude '.git' \
+            --exclude '.env' \
+            ./ \
+            "${DEPLOY_PATH}/"
+
+      - name: Create build environment
+        shell: bash
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          set -euo pipefail
+
+          {
+            printf 'TELEGRAM_BOT_TOKEN=%s\n' "$TELEGRAM_BOT_TOKEN"
+            printf 'TELEGRAM_CHAT_ID=%s\n' "$TELEGRAM_CHAT_ID"
+          } > "${DEPLOY_PATH}/.env"
+
+          chmod 600 "${DEPLOY_PATH}/.env"
+
       - name: Build Docker images
-        run: docker compose build
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sudo /usr/local/sbin/app-build "${APP_NAME}"
 
 
   # ============================================================
