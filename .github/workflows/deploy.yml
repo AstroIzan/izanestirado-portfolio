@@ -11,57 +11,185 @@ concurrency:
   group: deploy-portfolio
   cancel-in-progress: true
 
+env:
+  APP_NAME: izanestirado-portfolio
+  SERVER_HOST: 192.168.1.145
+  SERVER_USER: deploy
+  DEPLOY_PATH: /home/deploy/deployments/izanestirado-portfolio
+
 jobs:
-  deploy:
-    runs-on:
-      - self-hosted
-      - raspberry
-      - arm64
-      - production
+
+  # ============================================================
+  # TEST
+  # ============================================================
+  test:
+    name: Test
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy portfolio
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install Angular dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Build Angular
+        working-directory: client
+        run: npm run build
+
+
+  # ============================================================
+  # BUILD
+  # ============================================================
+  build:
+    name: Build Docker images
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker Compose
+        run: docker compose build
+
+
+  # ============================================================
+  # DEPLOY
+  # ============================================================
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
         shell: bash
         run: |
           set -euo pipefail
 
-          TARGET_DIR="/opt/izanestirado-portfolio"
-          ENV_FILE="/opt/docker/config/apps/izanestirado-portfolio/.env"
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
 
-          echo "======================================"
-          echo " Deploying Izan Estirado Portfolio"
-          echo "======================================"
+          printf '%s\n' '${{ secrets.SSH_PRIVATE_KEY }}' > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
 
-          cd "${TARGET_DIR}"
+          ssh-keyscan -H "${SERVER_HOST}" >> ~/.ssh/known_hosts
 
-          echo "==> Updating repository"
+      - name: Prepare deployment directory
+        shell: bash
+        run: |
+          set -euo pipefail
 
-          git fetch origin master
-          git checkout master
-          git reset --hard origin/master
+          ssh \
+            -i ~/.ssh/deploy_key \
+            -o BatchMode=yes \
+            "${SERVER_USER}@${SERVER_HOST}" \
+            "rm -rf '${DEPLOY_PATH}' && mkdir -p '${DEPLOY_PATH}'"
 
-          echo "==> Building containers"
+      - name: Copy application
+        shell: bash
+        run: |
+          set -euo pipefail
 
-          docker compose \
-            --env-file "${ENV_FILE}" \
-            build
+          rsync -az \
+            --delete \
+            --exclude '.git' \
+            --exclude '.env' \
+            -e "ssh -i ~/.ssh/deploy_key -o BatchMode=yes" \
+            ./ \
+            "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/"
 
-          echo "==> Starting containers"
+      - name: Create production environment
+        shell: bash
+        run: |
+          set -euo pipefail
 
-          docker compose \
-            --env-file "${ENV_FILE}" \
-            up -d --remove-orphans
+          ssh \
+            -i ~/.ssh/deploy_key \
+            -o BatchMode=yes \
+            "${SERVER_USER}@${SERVER_HOST}" \
+            "cat > '${DEPLOY_PATH}/.env' <<'EOF'
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          EOF
+          chmod 600 '${DEPLOY_PATH}/.env'"
 
-          echo "==> Cleaning unused images"
+      - name: Execute deployment
+        shell: bash
+        run: |
+          set -euo pipefail
 
-          docker image prune -f
+          ssh \
+            -i ~/.ssh/deploy_key \
+            -o BatchMode=yes \
+            "${SERVER_USER}@${SERVER_HOST}" \
+            "sudo /usr/local/sbin/app-deploy '${APP_NAME}'"
 
-          echo "==> Deployment status"
 
-          docker compose \
-            --env-file "${ENV_FILE}" \
-            ps
+  # ============================================================
+  # HEALTH CHECK
+  # ============================================================
+  health-check:
+    name: Health check
+    runs-on: ubuntu-latest
+    needs: deploy
 
-          echo "======================================"
-          echo " Deployment completed"
-          echo "======================================"
+    steps:
+      - name: Check application through server
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          printf '%s\n' '${{ secrets.SSH_PRIVATE_KEY }}' > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          ssh-keyscan -H "${SERVER_HOST}" >> ~/.ssh/known_hosts
+
+          ssh \
+            -i ~/.ssh/deploy_key \
+            -o BatchMode=yes \
+            "${SERVER_USER}@${SERVER_HOST}" \
+            'bash -s' <<'EOF'
+
+          set -euo pipefail
+
+          echo "Waiting for application..."
+
+          for i in {1..12}; do
+
+            if curl -fsS http://127.0.0.1:8080/ > /dev/null; then
+              echo "Application HTTP check: OK"
+              break
+            fi
+
+            if [ "$i" -eq 12 ]; then
+              echo "Application HTTP check: FAILED"
+              exit 1
+            fi
+
+            echo "Attempt $i/12 failed. Retrying..."
+            sleep 5
+
+          done
+
+          echo
+          echo "Docker Compose status:"
+          cd /srv/apps/izanestirado-portfolio
+          docker compose ps
+
+          EOF
