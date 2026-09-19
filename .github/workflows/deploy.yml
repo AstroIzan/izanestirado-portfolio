@@ -201,24 +201,19 @@ jobs:
           echo "HTTP: OK"
 
           echo
-          echo "Checking API..."
+          echo "Checking API health..."
 
           curl -fsS \
             --max-time 10 \
-            http://127.0.0.1:8080/api/ \
-            > /dev/null || {
-              echo "API endpoint returned an error."
-              exit 1
-            }
+            http://127.0.0.1:8080/api/health \
+            > /dev/null
 
           echo "API: OK"
 
           echo
           echo "Checking containers..."
 
-          cd /srv/apps/izanestirado-portfolio
-
-          sudo docker compose ps
+          sudo /usr/local/sbin/app-status izanestirado-portfolio
 
           echo
           echo "Health check completed successfully."
